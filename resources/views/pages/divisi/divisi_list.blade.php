@@ -10,6 +10,9 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Divisi List</h4>
+                        <a class="btn btn-info btn-fill btn-wd add-table" href="{{ route('page.add', 'divisi') }}">
+                                Add
+                            </a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
