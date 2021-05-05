@@ -27,5 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('{page}', ['as' => 'page.index', 'uses' => 'PageController@index']);
+	Route::get('{page}/add', ['as' => 'page.add', 'uses' => 'PageController@add']);
+	Route::post('{page}', ['as' => 'page.save', 'uses' => 'PageController@save']);
 });
 
