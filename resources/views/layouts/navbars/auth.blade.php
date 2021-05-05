@@ -60,22 +60,22 @@
                     <p>{{ __('Notifications') }}</p>
                 </a>
             </li>
-            <li class="{{ $elementActive == 'tables' ? 'active' : '' }}">
-                <a href="{{ route('page.index', 'tables') }}">
+            <li class="{{ $elementActive == 'company' ? 'active' : '' }}">
+                <a href="{{ route('page.index', 'company') }}">
                     <i class="nc-icon nc-tile-56"></i>
-                    <p>{{ __('Table List') }}</p>
+                    <p>Company</p>
                 </a>
             </li>
-            <li class="{{ $elementActive == 'typography' ? 'active' : '' }}">
-                <a href="{{ route('page.index', 'typography') }}">
-                    <i class="nc-icon nc-caps-small"></i>
-                    <p>{{ __('Typography') }}</p>
+            <li class="{{ $elementActive == 'divisi' ? 'active' : '' }}">
+                <a href="{{ route('page.index', 'divisi') }}">
+                    <i class="nc-icon nc-tile-56"></i>
+                    <p>Divisi</p>
                 </a>
             </li>
-            <li class="active-pro {{ $elementActive == 'upgrade' ? 'active' : '' }}">
-                <a href="{{ route('page.index', 'upgrade') }}" class="bg-danger">
-                    <i class="nc-icon nc-spaceship text-white"></i>
-                    <p class="text-white">{{ __('Upgrade to PRO') }}</p>
+            <li class="{{ $elementActive == 'aplikasi' ? 'active' : '' }}">
+                <a href="{{ route('page.index', 'aplikasi') }}">
+                    <i class="nc-icon nc-tile-56"></i>
+                    <p>Aplikasi</p>
                 </a>
             </li>
         </ul>
