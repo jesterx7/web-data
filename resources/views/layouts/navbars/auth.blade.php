@@ -78,6 +78,18 @@
                     <p>Aplikasi</p>
                 </a>
             </li>
+            <li class="{{ $elementActive == 'leader' ? 'active' : '' }}">
+                <a href="{{ route('page.index', 'leader') }}">
+                    <i class="nc-icon nc-tile-56"></i>
+                    <p>Leader</p>
+                </a>
+            </li>
+            <li class="{{ $elementActive == 'anak' ? 'active' : '' }}">
+                <a href="{{ route('page.index', 'anak') }}">
+                    <i class="nc-icon nc-tile-56"></i>
+                    <p>Anak</p>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

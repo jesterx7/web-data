@@ -31,3 +31,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('{page}', ['as' => 'page.save', 'uses' => 'PageController@save']);
 });
 
+/* API Routes */
+
+Route::group(['middleware' => 'auth'], function () {
+	Route::get('{page}/api/divisi/{id}', ['as' => 'api.divisi', 'uses' => 'ApiController@apiDivisi']);
+	Route::get('{page}/api/leader/{id}', ['as' => 'api.leader', 'uses' => 'ApiController@apiLeader']);
+});
+

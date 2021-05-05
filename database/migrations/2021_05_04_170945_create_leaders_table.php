@@ -19,8 +19,6 @@ class CreateLeadersTable extends Migration
             $table->string('password');
             $table->unsignedBigInteger('id_apps');
             $table->foreign('id_apps')->references('id_apps')->on('apps');
-            $table->unsignedBigInteger('id_divisi');
-            $table->foreign('id_divisi')->references('id_divisi')->on('divisi');
             $table->string('status');
         });
     }
