@@ -21,8 +21,6 @@ class CreateAnaksTable extends Migration
             $table->foreign('id_divisi')->references('id_divisi')->on('divisi');
             $table->unsignedBigInteger('id_leader');
             $table->foreign('id_leader')->references('id_leader')->on('leaders');
-            $table->unsignedBigInteger('id_apps');
-            $table->foreign('id_apps')->references('id_apps')->on('apps');
             $table->string('status');
         });
     }

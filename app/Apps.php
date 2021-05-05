@@ -29,4 +29,9 @@ class Apps extends Eloquent
     {
         return $this->hasMany('App\Divisi', 'id_apps');
     }
+
+    public function leaders()
+    {
+        return $this->hasMany('App\Leader', 'id_leader');
+    }
 }

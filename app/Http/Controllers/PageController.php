@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Company;
+use App\Leader;
 use App\Divisi;
 use App\Apps;
+use App\Anak;
 
 class PageController extends Controller
 {
@@ -38,6 +40,12 @@ class PageController extends Controller
                 case 'divisi':
                     $index_data = Divisi::all();
                     break;
+                case 'leader':
+                    $index_data = Leader::all();
+                    break;
+                case 'anak':
+                    $index_data = Anak::all();
+                    break;
                 default:
                     $index_data = [];
                     break;
@@ -59,6 +67,12 @@ class PageController extends Controller
                 case 'divisi':
                     $apps = Apps::all();
                     return view("pages.{$page}.{$page}_add", ['apps' => $apps]);
+                case 'leader':
+                    $apps = Apps::all();
+                    return view("pages.{$page}.{$page}_add", ['apps' => $apps]);
+                case 'anak':
+                    $apps = Apps::all();
+                    return view("pages.{$page}.{$page}_add", ['apps' => $apps]);
                 default:
                     return view("pages.{$page}.{$page}_add");
             }
@@ -77,6 +91,12 @@ class PageController extends Controller
                 break;
             case 'divisi':
                 $this->saveDivisi($request);
+                break;
+            case 'leader':
+                $this->saveLeader($request);
+                break;
+            case 'anak':
+                $this->saveAnak($request);
                 break;
             default:
                 break;
@@ -122,5 +142,39 @@ class PageController extends Controller
         $divisi->status         = 'ON';
 
         return $divisi->save();
+    }
+
+    public function saveLeader(Request $request) {
+        $this->validate($request, [
+            'username'  => 'required',
+            'password'  => 'required',
+            'apps'      => 'required'   
+        ]);
+
+        $leader = new Leader;
+        $leader->username   = $request->get('username');
+        $leader->password   = $request->get('password');
+        $leader->id_apps    = $request->get('apps');
+        $leader->status     = 'ON';
+
+        return $leader->save();
+    }
+
+    public function saveAnak(Request $request) {
+        $this->validate($request, [
+            'username'  => 'required',
+            'password'  => 'required',
+            'divisi'    => 'required|not_in:0',
+            'leader'    => 'required|not_in:0'
+        ]);
+
+        $anak = new Anak;
+        $anak->username     = $request->get('username');
+        $anak->password     = $request->get('password');
+        $anak->id_divisi    = $request->get('divisi');
+        $anak->id_leader    = $request->get('leader');
+        $anak->status       = 'ON';
+
+        return $anak->save();
     }
 }

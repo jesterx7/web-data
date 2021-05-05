@@ -24,4 +24,9 @@ class Divisi extends Eloquent
     {
         return $this->belongsTo('App\Apps', 'id_apps');
     }
+
+    public function anak()
+    {
+        return $this->hasMany('App\Anak', 'id_anak');
+    }
 }
