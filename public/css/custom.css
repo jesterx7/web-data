@@ -9,3 +9,7 @@
 .search--data {
 	width: 50%;
 }
+
+.input--file__excel {
+	margin: 10px 1px;	
+}

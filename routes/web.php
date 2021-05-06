@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('{page}', ['as' => 'page.index', 'uses' => 'PageController@index']);
 	Route::get('{page}/add', ['as' => 'page.add', 'uses' => 'PageController@add']);
 	Route::post('{page}', ['as' => 'page.save', 'uses' => 'PageController@save']);
+	Route::post('{page}/import', ['as' => 'page.import', 'uses' => 'ImportController@import']);
 });
 
 /* API Routes */
