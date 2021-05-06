@@ -62,7 +62,7 @@ The above copyright notice and this permission notice shall be included in all c
     <meta property="og:site_name" content="Creative Tim" />
     
     <title>
-        {{ __('Paper Dashboard by Creative Tim') }}
+        {{ __('Dashboard') }}
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
         name='viewport' />
@@ -218,7 +218,7 @@ The above copyright notice and this permission notice shall be included in all c
                             <span class="navbar-toggler-bar bar3"></span>
                         </button>
                     </div>
-                    <a class="navbar-brand" href="#pablo">{{ __('Paper Dashboard') }}</a>
+                    <a class="navbar-brand" href="#pablo">{{ __('Dashboard') }}</a>
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
                     aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">

@@ -28,7 +28,7 @@ The above copyright notice and this permission notice shall be included in all c
     <!-- Extra details for Live View on GitHub Pages -->
     
     <title>
-        {{ __('Paper Dashboard by Creative Tim') }}
+        paper-dashboard
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
         name='viewport' />
@@ -38,6 +38,7 @@ The above copyright notice and this permission notice shall be included in all c
     <!-- CSS Files -->
     <link href="{{ asset('paper') }}/css/bootstrap.min.css" rel="stylesheet" />
     <link href="{{ asset('paper') }}/css/paper-dashboard.css?v=2.0.0" rel="stylesheet" />
+    <link href="{{ asset('css') }}/custom.css" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ asset('paper') }}/demo/demo.css" rel="stylesheet" />
 
