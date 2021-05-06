@@ -850,6 +850,11 @@ fieldset[disabled] .btn-success.active {
   color: #FFFFFF;
 }
 
+.btn-export {
+  background-color: #00d173;
+  color: #FFFFFF;
+}
+
 .btn-info:hover,
 .btn-info:focus,
 .btn-info:active,
@@ -4689,6 +4694,7 @@ License - nucleoapp.com/license/
 
 .table-responsive {
   padding-bottom: 10px;
+  overflow-x: hidden !important;
 }
 
 #tables .table-responsive {
