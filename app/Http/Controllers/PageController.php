@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\TutupBuka;
 use App\Company;
 use App\Leader;
 use App\Divisi;
@@ -45,6 +46,9 @@ class PageController extends Controller
                     break;
                 case 'anak':
                     $index_data = Anak::all();
+                    break;
+                case 'tutupbuka':
+                    $index_data = TutupBuka::all();
                     break;
                 default:
                     $index_data = [];
@@ -164,6 +168,7 @@ class PageController extends Controller
         $this->validate($request, [
             'username'  => 'required',
             'password'  => 'required',
+            'apps'      => 'required|not_in:0',
             'divisi'    => 'required|not_in:0',
             'leader'    => 'required|not_in:0'
         ]);
@@ -171,6 +176,7 @@ class PageController extends Controller
         $anak = new Anak;
         $anak->username     = $request->get('username');
         $anak->password     = $request->get('password');
+        $anak->id_apps      = $request->get('apps');
         $anak->id_divisi    = $request->get('divisi');
         $anak->id_leader    = $request->get('leader');
         $anak->status       = 'ON';

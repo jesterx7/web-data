@@ -22,6 +22,7 @@ class AnakImport implements ToModel, WithHeadingRow
             'username'  => $row['username'],
             'password'  => $row['password'],
             'status'    => 'ON',
+            'id_apps'   => $this->getAppsId($row['nama_apps']),
             'id_divisi' => $this->getDivisiId($row['nama_divisi'], $this->getAppsId($row['nama_apps'])),
             'id_leader' => $this->getLeaderId($row['username_leader'], $this->getAppsId($row['nama_apps'])),
         ]);

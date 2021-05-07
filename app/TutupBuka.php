@@ -3,8 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Eloquent;
 
-class TutupBuka extends Model
+class TutupBuka extends Eloquent
 {
     /**
      * The table associated with the model.
@@ -18,4 +19,9 @@ class TutupBuka extends Model
     protected $fillable = [
         'tanggal_tutup', 'tanggal_buka', 'id_anak', 'status'
     ];
+
+    public function anak()
+    {
+        return $this->belongsTo('App\Anak', 'id_anak');
+    }
 }

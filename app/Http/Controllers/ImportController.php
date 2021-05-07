@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\TutupBukaImport;
 use App\Imports\CompaniesImport;
 use App\Imports\DivisiImport;
 use App\Imports\LeaderImport;
@@ -29,6 +30,9 @@ class ImportController extends Controller
                 break;
             case 'anak':
                 Excel::import(new AnakImport, request()->file('file'));
+                break;
+            case 'tutupbuka':
+                Excel::import(new TutupBukaImport, request()->file('file'));
                 break;
             default:
                 break;
