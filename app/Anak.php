@@ -29,4 +29,14 @@ class Anak extends Eloquent
     {
         return $this->belongsTo('App\Divisi', 'id_divisi');
     }
+
+    public function apps()
+    {
+        return $this->belongsTo('App\Apps', 'id_apps');
+    }
+    
+    public function tutupbuka()
+    {
+        return $this->hasMany('App\TutupBuka', 'id_tutupbuka');
+    }
 }

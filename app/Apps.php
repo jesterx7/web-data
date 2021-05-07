@@ -34,4 +34,9 @@ class Apps extends Eloquent
     {
         return $this->hasMany('App\Leader', 'id_leader');
     }
+
+    public function anaks()
+    {
+        return $this->hasMany('App\Anak', 'id_anak');
+    }
 }

@@ -47,6 +47,12 @@
                     <p>Anak</p>
                 </a>
             </li>
+            <li class="{{ $elementActive == 'tutupbuka' ? 'active' : '' }}">
+                <a href="{{ route('page.index', 'tutupbuka') }}">
+                    <i class="nc-icon nc-tile-56"></i>
+                    <p>TutupBuka</p>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

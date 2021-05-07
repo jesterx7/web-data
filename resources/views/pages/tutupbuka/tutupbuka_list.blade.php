@@ -1,6 +1,6 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'anak'
+    'elementActive' => 'tutupbuka'
 ])
 
 @section('content')
@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Anak List</h4>
+                        <h4 class="card-title">TutupBuka List</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -19,36 +19,28 @@
                                         ID
                                     </th>
                                     <th>
-                                        Username
+                                        Anak
                                     </th>
                                     <th>
-                                        Password
+                                        Tanggal Tutup
                                     </th>
                                     <th>
-                                        Apps
-                                    </th>
-                                    <th>
-                                        Divisi
-                                    </th>
-                                    <th>
-                                        Leader
+                                        Tanggal Buka
                                     </th>
                                     <th>
                                 </thead>
                                 <tbody>
                                 @foreach($index_data as $data)
                                     <tr>
-                                        <td>{{ $data->id_anak }}</td>
-                                        <td>{{ $data->username }}</td>
-                                        <td>{{ $data->password }}</td>
-                                        <td>{{ $data->apps->nama_apps }}</td>
-                                        <td>{{ $data->divisi->nama_divisi }}</td>
-                                        <td>{{ $data->leaders->username }}</td>
+                                        <td>{{ $data->id_tutupbuka }}</td>
+                                        <td>{{ $data->anak->username }}</td>
+                                        <td>{{ $data->tanggal_tutup }}</td>
+                                        <td>{{ $data->tanggal_buka }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
-                            <form action="{{ route('page.import', 'anak') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('page.import', 'tutupbuka') }}" method="POST" enctype="multipart/form-data">
                                 <div class="row">
                                     @csrf
                                     <div class="col-md-6">
