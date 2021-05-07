@@ -853,6 +853,7 @@ fieldset[disabled] .btn-success.active {
 .btn-export {
   background-color: #00d173;
   color: #FFFFFF;
+  width: 100%;
 }
 
 .btn-info:hover,
