@@ -10,6 +10,28 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">TutupBuka List</h4>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <a class="btn btn-info btn-fill add-table add--data" href="{{ route('page.add', 'tutupbuka') }}">
+                                    Add
+                                    </a>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group select--search">
+                                        <select name="tutupbuka" class="form-control">
+                                        </select>
+                                    </div>
+                                </div>
+                            <div class="col-md-2">
+                                <div class="form-group select--search">
+                                    <input type="text" name="search_tutupbuka" class="form-control" placeholder="Search" required>
+                                </div>
+                            </div>
+                                <div class="col-md-1">
+                                    <a class="btn btn-info btn-fill add-table" href="{{ route('page.add', 'tutupbuka') }}"><i class="nc-icon nc-zoom-split"></i>
+                                    </a>
+                                </div>
+                            </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -19,7 +41,7 @@
                                         ID
                                     </th>
                                     <th>
-                                        Anak
+                                        tutupbuka
                                     </th>
                                     <th>
                                         Tanggal Tutup
@@ -33,7 +55,7 @@
                                 @foreach($index_data as $data)
                                     <tr>
                                         <td>{{ $data->id_tutupbuka }}</td>
-                                        <td>{{ $data->anak->username }}</td>
+                                        <td>{{ $data->tutupbuka->username }}</td>
                                         <td>{{ $data->tanggal_tutup }}</td>
                                         <td>{{ $data->tanggal_buka }}</td>
                                     </tr>

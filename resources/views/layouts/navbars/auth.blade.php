@@ -37,19 +37,19 @@
             </li>
             <li class="{{ $elementActive == 'leader' ? 'active' : '' }}">
                 <a href="{{ route('page.index', 'leader') }}">
-                    <i class="nc-icon nc-tile-56"></i>
+                    <i class="nc-icon nc-single-02"></i>
                     <p>Leader</p>
                 </a>
             </li>
             <li class="{{ $elementActive == 'anak' ? 'active' : '' }}">
                 <a href="{{ route('page.index', 'anak') }}">
-                    <i class="nc-icon nc-tile-56"></i>
+                    <i class="nc-icon nc-badge"></i>
                     <p>Anak</p>
                 </a>
             </li>
             <li class="{{ $elementActive == 'tutupbuka' ? 'active' : '' }}">
                 <a href="{{ route('page.index', 'tutupbuka') }}">
-                    <i class="nc-icon nc-tile-56"></i>
+                    <i class="nc-icon nc-bullet-list-67"></i>
                     <p>TutupBuka</p>
                 </a>
             </li>
