@@ -28,7 +28,7 @@ The above copyright notice and this permission notice shall be included in all c
     <!-- Extra details for Live View on GitHub Pages -->
     
     <title>
-        paper-dashboard
+        Dashboard
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
         name='viewport' />
@@ -47,7 +47,7 @@ The above copyright notice and this permission notice shall be included in all c
 <body class="{{ $class }}">
     
     @auth()
-        @include('layouts.page_templates.auth')
+        @include('layouts.page_templates.auth ')
         @include('layouts.navbars.fixed-plugin')
     @endauth
     
