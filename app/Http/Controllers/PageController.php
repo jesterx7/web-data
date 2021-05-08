@@ -33,22 +33,22 @@ class PageController extends Controller
         if (view()->exists("pages.{$page}.{$page}_list")) {
             switch ($page) {
                 case 'company':
-                    $index_data = Company::all();
+                    $index_data = Company::paginate(20);
                     break;
                 case 'aplikasi':
-                    $index_data = Apps::all();
+                    $index_data = Apps::paginate(20);
                     break;
                 case 'divisi':
-                    $index_data = Divisi::all();
+                    $index_data = Divisi::paginate(20);
                     break;
                 case 'leader':
-                    $index_data = Leader::all();
+                    $index_data = Leader::paginate(20);
                     break;
                 case 'anak':
-                    $index_data = Anak::all();
+                    $index_data = Anak::paginate(20);
                     break;
                 case 'tutupbuka':
-                    $index_data = TutupBuka::all();
+                    $index_data = TutupBuka::paginate(20);
                     break;
                 default:
                     $index_data = [];

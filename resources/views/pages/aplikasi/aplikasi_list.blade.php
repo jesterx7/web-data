@@ -61,6 +61,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            {{ $index_data->links() }}
                             <form action="{{ route('page.import', 'aplikasi') }}" method="POST" enctype="multipart/form-data">
                                 <div class="row">
                                     @csrf
