@@ -6,8 +6,9 @@ use App\Apps;
 use App\Company;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
 
-class AppsImport implements ToModel, WithHeadingRow
+class AppsImport implements ToModel, WithHeadingRow, WithValidation
 {
     /**
     * @param array $row
@@ -23,5 +24,13 @@ class AppsImport implements ToModel, WithHeadingRow
                                         ->first()
                                         ->id_company,
         ]);
+    }
+
+    public function rules(): array
+    {
+        return [
+            '*.nama_apps'       => ['string', 'unique:apps,nama_apps'],
+            '*.nama_company'    => ['string', 'exists:companies,nama_company'],
+        ];
     }
 }

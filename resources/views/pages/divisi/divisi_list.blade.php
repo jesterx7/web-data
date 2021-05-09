@@ -35,6 +35,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
+                            @include('layouts.errors_templates.errors_data')
                             <table class="table">
                                 <thead class=" text-primary">
                                     <th>

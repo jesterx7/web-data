@@ -6,26 +6,37 @@ use App\Anak;
 use App\Apps;
 use App\Divisi;
 use App\Leader;
-use Maatwebsite\Excel\Concerns\ToModel;
+use App\Http\Controllers\ImportValidator;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class AnakImport implements ToModel, WithHeadingRow
+class AnakImport implements ToCollection, WithHeadingRow
 {
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
-    public function model(array $row)
+    public function collection(Collection $rows)
     {
-        return new Anak([
-            'username'  => $row['username'],
-            'password'  => $row['password'],
-            'status'    => 'ON',
-            'id_apps'   => $this->getAppsId($row['nama_apps']),
-            'id_divisi' => $this->getDivisiId($row['nama_divisi'], $this->getAppsId($row['nama_apps'])),
-            'id_leader' => $this->getLeaderId($row['username_leader'], $this->getAppsId($row['nama_apps'])),
-        ]);
+        Validator::make($rows->toArray(), [
+            '*.nama_apps'               => ['string', 'exists:apps,nama_apps'],
+            '*.nama_divisi'             => ['string', 'exists:divisi,nama_divisi'],
+            '*.username_leader'         => ['string', 'exists:leaders,username']
+        ])->validate();
+        foreach ($rows as $key => $row) {
+            $validator = new ImportValidator();
+            if ($validator::divisiExists($row['nama_divisi'], $row['nama_apps']) && 
+                $validator::leaderExists($row['username_leader'], $row['nama_apps'])) {
+                $anak = Anak::create([
+                    'username'  => $row['username'],
+                    'password'  => $row['password'],
+                    'status'    => 'ON',
+                    'id_apps'   => $this->getAppsId($row['nama_apps']),
+                    'id_divisi' => $this->getDivisiId($row['nama_divisi'], $this->getAppsId($row['nama_apps'])),
+                    'id_leader' => $this->getLeaderId($row['username_leader'], $this->getAppsId($row['nama_apps'])),
+                ]);
+            } else {
+                return back()->withErrors(['Divisi / Leader is Not Exsits on Its App in Row '. strval($key+2)]);
+            }
+        }
     }
 
     private function getAppsId($nama_apps)
