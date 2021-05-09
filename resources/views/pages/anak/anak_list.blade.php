@@ -19,6 +19,9 @@
                                 <div class="col-md-3">
                                     <div class="form-group select--search">
                                         <select name="anak" class="form-control">
+                                        @foreach($filters as $key => $filter)
+                                            <option class="filter--option" value="{{ $key }}">{{ $filter }}</option>
+                                        @endforeach
                                         </select>
                                     </div>
                                 </div>

@@ -19,6 +19,9 @@
                                 <div class="col-md-3">
                                     <div class="form-group select--search">
                                         <select name="tutupbuka" class="form-control">
+                                        @foreach($filters as $key => $filter)
+                                            <option class="filter--option" value="{{ $key }}">{{ $filter }}</option>
+                                        @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -42,7 +45,7 @@
                                         ID
                                     </th>
                                     <th>
-                                        tutupbuka
+                                        Anak
                                     </th>
                                     <th>
                                         Tanggal Tutup
@@ -56,7 +59,7 @@
                                 @foreach($index_data as $data)
                                     <tr>
                                         <td>{{ $data->id_tutupbuka }}</td>
-                                        <td>{{ $data->tutupbuka->username }}</td>
+                                        <td>{{ $data->anak->username }}</td>
                                         <td>{{ $data->tanggal_tutup }}</td>
                                         <td>{{ $data->tanggal_buka }}</td>
                                     </tr>

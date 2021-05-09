@@ -13,3 +13,7 @@
 .input--file__excel {
 	margin: 10px 1px;	
 }
+
+.filter--option {
+	transform: uppercase;
+}

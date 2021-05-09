@@ -34,28 +34,35 @@ class PageController extends Controller
             switch ($page) {
                 case 'company':
                     $index_data = Company::paginate(20);
+                    $filters     = ['nama_company' => 'Company'];
                     break;
                 case 'aplikasi':
                     $index_data = Apps::paginate(20);
+                    $filters     = ['nama_apps' => 'Aplikasi', 'link' => 'Link Apps', 'nama_company' => 'Company'];
                     break;
                 case 'divisi':
                     $index_data = Divisi::paginate(20);
+                    $filters     = ['nama_divisi' => 'Divisi', 'nama_aplikasi' => 'Aplikasi'];
                     break;
                 case 'leader':
                     $index_data = Leader::paginate(20);
+                    $filters     = ['username' => 'Username', 'nama_aplikasi' => 'Aplikasi'];
                     break;
                 case 'anak':
                     $index_data = Anak::paginate(20);
+                    $filters     = ['username' => 'Username', 'nama_aplikasi' => 'Aplikasi', 'divisi' => 'Divisi', 'leader' => 'Leader'];
                     break;
                 case 'tutupbuka':
                     $index_data = TutupBuka::paginate(20);
+                    $filters     = ['anak' => 'Anak'];
                     break;
                 default:
                     $index_data = [];
+                    $filters     = [];
                     break;
             }
 
-            return view("pages.{$page}.{$page}_list", ["index_data" => $index_data]);
+            return view("pages.{$page}.{$page}_list", ["index_data" => $index_data, "filters" => $filters]);
         }
 
         return abort(404);
