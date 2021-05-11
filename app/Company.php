@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 use Eloquent;
 
 class Company extends Eloquent
 {
+    use Sortable;
     /**
      * The table associated with the model.
      *
@@ -18,6 +20,10 @@ class Company extends Eloquent
 
     protected $fillable = [
         'nama_company'
+    ];
+
+    public $sortable = [
+        'id_company', 'nama_company'
     ];
 
     public function apps()

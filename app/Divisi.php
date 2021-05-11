@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 use Eloquent;
 
 class Divisi extends Eloquent
 {
+    use Sortable;
     /**
      * The table associated with the model.
      *
@@ -18,6 +20,10 @@ class Divisi extends Eloquent
 
     protected $fillable = [
         'nama_divisi', 'id_apps', 'status'
+    ];
+
+    public $sortable = [
+        'id_divisi', 'nama_divisi'
     ];
 
     public function apps()

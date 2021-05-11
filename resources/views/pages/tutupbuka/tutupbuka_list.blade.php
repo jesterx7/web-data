@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">TutupBuka List</h4>
+                        <h4 class="card-title">TutupBuka</h4>
                             <div class="row">
                                 <div class="col-md-2">
                                     <a class="btn btn-info btn-fill add-table add--data" href="{{ route('page.add', 'tutupbuka') }}">
@@ -42,16 +42,16 @@
                             <table class="table">
                                 <thead class=" text-primary">
                                     <th>
-                                        ID
+                                        @sortablelink('id_tutupbuka', 'ID')
                                     </th>
                                     <th>
-                                        Anak
+                                        @sortablelink('anak.username', 'Anak')
                                     </th>
                                     <th>
-                                        Tanggal Tutup
+                                        @sortablelink('tanggal_tutup', 'Tanggal Tutup')
                                     </th>
                                     <th>
-                                        Tanggal Buka
+                                        @sortablelink('tanggal_buka', 'Tanggal Buka')
                                     </th>
                                     <th>
                                 </thead>

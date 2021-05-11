@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 use Eloquent;
 
 class Anak extends Eloquent
 {
+    use Sortable;
     /**
      * The table associated with the model.
      *
@@ -18,6 +20,10 @@ class Anak extends Eloquent
 
     protected $fillable = [
         'username', 'password', 'id_apps', 'id_divisi', 'id_leader', 'status'
+    ];
+
+    public $sortable = [
+        'id_anak', 'username', 'password'
     ];
 
     public function leaders()

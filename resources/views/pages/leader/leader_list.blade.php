@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Leader List</h4>
+                        <h4 class="card-title">Leader</h4>
                             <div class="row">
                                 <div class="col-md-2">
                                     <a class="btn btn-info btn-fill add-table add--data" href="{{ route('page.add', 'leader') }}">
@@ -42,16 +42,16 @@
                             <table class="table">
                                 <thead class=" text-primary">
                                     <th>
-                                        ID
+                                        @sortablelink('id_leader', 'ID')
                                     </th>
                                     <th>
-                                        Username
+                                        @sortablelink('username', 'Username')
                                     </th>
                                     <th>
-                                        Password
+                                        @sortablelink('password', 'Password')
                                     </th>
                                     <th>
-                                        Apps
+                                        @sortablelink('apps.nama_apps', 'Apps')
                                     </th>
                                     <th>
                                 </thead>
