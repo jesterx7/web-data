@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Aplikasi List</h4>
+                        <h4 class="card-title">Aplikasi</h4>
                         <div class="row">
                             <div class="col-md-2">
                                 <a class="btn btn-info btn-fill add-table add--data" href="{{ route('page.add', 'aplikasi') }}">
@@ -42,16 +42,16 @@
                             <table class="table">
                                 <thead class=" text-primary">
                                     <th>
-                                        ID
+                                        @sortablelink('id_apps', 'ID')
                                     </th>
                                     <th>
-                                        Nama Aplikasi
+                                        @sortablelink('nama_apps', 'Apps')
                                     </th>
                                     <th>
-                                        Link
+                                        @sortablelink('link_apps', 'Link')
                                     </th>
                                     <th>
-                                        Company
+                                        @sortablelink('companies.nama_company', 'Company')
                                     </th>
                                 </thead>
                                 <tbody>

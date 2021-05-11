@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Divisi List</h4>
+                        <h4 class="card-title">Divisi</h4>
                         <div class="row">
                             <div class="col-md-2">
                                 <a class="btn btn-info btn-fill add-table add--data" href="{{ route('page.add', 'divisi') }}">
@@ -42,13 +42,13 @@
                             <table class="table">
                                 <thead class=" text-primary">
                                     <th>
-                                        ID
+                                        @sortablelink('id_divisi', 'ID')
                                     </th>
                                     <th>
-                                        Nama Divisi
+                                        @sortablelink('nama_divisi', 'Divisi')
                                     </th>
                                     <th>
-                                        Nama Apps
+                                        @sortablelink('apps.nama_apps', 'Apps')
                                     </th>
                                 </thead>
                                 <tbody>

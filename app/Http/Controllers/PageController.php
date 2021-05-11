@@ -33,27 +33,27 @@ class PageController extends Controller
         if (view()->exists("pages.{$page}.{$page}_list")) {
             switch ($page) {
                 case 'company':
-                    $index_data = Company::paginate(20);
+                    $index_data = Company::sortable()->paginate(20);
                     $filters     = ['nama_company' => 'Company'];
                     break;
                 case 'aplikasi':
-                    $index_data = Apps::paginate(20);
+                    $index_data = Apps::sortable()->paginate(20);
                     $filters     = ['nama_apps' => 'Aplikasi', 'link' => 'Link Apps', 'nama_company' => 'Company'];
                     break;
                 case 'divisi':
-                    $index_data = Divisi::paginate(20);
+                    $index_data = Divisi::sortable()->paginate(20);
                     $filters     = ['nama_divisi' => 'Divisi', 'nama_aplikasi' => 'Aplikasi'];
                     break;
                 case 'leader':
-                    $index_data = Leader::paginate(20);
+                    $index_data = Leader::sortable()->paginate(20);
                     $filters     = ['username' => 'Username', 'nama_aplikasi' => 'Aplikasi'];
                     break;
                 case 'anak':
-                    $index_data = Anak::paginate(20);
+                    $index_data = Anak::sortable()->paginate(20);
                     $filters     = ['username' => 'Username', 'nama_aplikasi' => 'Aplikasi', 'divisi' => 'Divisi', 'leader' => 'Leader'];
                     break;
                 case 'tutupbuka':
-                    $index_data = TutupBuka::paginate(20);
+                    $index_data = TutupBuka::sortable()->paginate(20);
                     $filters     = ['anak' => 'Anak'];
                     break;
                 default:
