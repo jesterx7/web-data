@@ -17,3 +17,17 @@
 .filter--option {
 	transform: uppercase;
 }
+
+.btn-action__checked {
+	display: hidden;
+}
+
+.btn-action--close {
+	background-color: #f55b5b;
+	color: #ffffff;
+}
+
+.btn-action--open {
+	background-color: #6bff7f;
+	color: #ffffff;
+}

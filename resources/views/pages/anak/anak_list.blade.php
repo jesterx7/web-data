@@ -1,6 +1,7 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'anak'
+    'elementActive' => 'anak',
+    'subtab' => 'Anak'
 ])
 
 @section('content')
@@ -73,12 +74,42 @@
                                         <td>{{ $data->apps->nama_apps }}</td>
                                         <td>{{ $data->divisi->nama_divisi }}</td>
                                         <td>{{ $data->leaders->username }}</td>
-                                        <td>
-                                            <a class="btn btn-info btn-fill add-table add--data" href="{{ route('page.add', 'anak') }}" name="buka">Buka</a>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-info btn-fill add-table add--data" href="{{ route('page.add', 'anak') }}" name="tutup">Tutup</a>
-                                        </td>
+                                        @if ($data->tutupbuka->last())
+                                            @if ($data->tutupbuka->last()->tanggal_buka != '9999-12-31 00:00:00')
+                                            <td>
+                                                <form method="post" action="{{ route('api.tutupbuka', ['anak', $data->id_anak]) }}">
+                                                    @csrf
+                                                    @method('POST')
+                                                    <input type="text" name="action" value="tutup" hidden="true"/>
+                                                    <button type="submit" class="btn btn-info btn-fill btn-action--close">
+                                                        <i class="nc-icon nc-simple-remove"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                            @else
+                                            <td>
+                                                <form method="post" action="{{ route('api.tutupbuka', ['anak', $data->id_anak]) }}">
+                                                    @csrf
+                                                    @method('POST')
+                                                    <input type="text" name="action" value="buka" hidden="true"/>
+                                                    <button type="submit" class="btn btn-info btn-fill btn-action--open">
+                                                        <i class="nc-icon nc-check-2"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                            @endif
+                                            @else
+                                            <td>
+                                                <form method="post" action="{{ route('api.tutupbuka', ['anak', $data->id_anak]) }}">
+                                                    @csrf
+                                                    @method('POST')
+                                                    <input type="text" name="action" value="tutup" hidden="true"/>
+                                                    <button type="submit" class="btn btn-info btn-fill btn-action--close">
+                                                        <i class="nc-icon nc-simple-remove"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                                 </tbody>

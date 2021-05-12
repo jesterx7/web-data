@@ -43,6 +43,6 @@ class Anak extends Eloquent
     
     public function tutupbuka()
     {
-        return $this->hasMany('App\TutupBuka', 'id_tutupbuka');
+        return $this->hasMany('App\TutupBuka', 'id_anak');
     }
 }
