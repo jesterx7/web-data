@@ -6,7 +6,7 @@
             </div>
         </a>
         <a class="simple-text logo-normal">
-            {{ __('Creative Tim') }}
+            {{ isset(Auth::user()->name) ? Auth::user()->name : 'Creative Team' }}
         </a>
     </div>
     <div class="sidebar-wrapper">

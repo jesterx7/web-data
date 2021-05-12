@@ -1,6 +1,7 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'tutupbuka'
+    'elementActive' => 'tutupbuka',
+    'subtab' => 'Tutup Buka'
 ])
 
 @section('content')

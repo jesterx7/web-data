@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Divisi;
 use App\Leader;
+use App\TutupBuka;
+use Carbon\Carbon;
 
 class ApiController extends Controller
 {
@@ -67,5 +69,28 @@ class ApiController extends Controller
         </div>';
 
         return $html;
+    }
+
+    public function apiTutupBuka(string $page, string $id, Request $request)
+    {
+        $this->validate($request, [
+            'action'    => 'required'
+        ]);
+
+        if ($request->get('action') == 'tutup') {
+            $tutupbuka                  = new TutupBuka;
+            $tutupbuka->tanggal_tutup   = Carbon::now();
+            $tutupbuka->status          = 'ON';
+            $tutupbuka->tanggal_buka    = '9999-12-31 00:00:00';
+            $tutupbuka->id_anak         = $id;
+        } else {
+            $tutupbuka = TutupBuka::where('id_anak', $id)->orderBy('id_tutupbuka', 'desc')->first();
+            $tutupbuka->tanggal_buka = Carbon::now();
+        }
+        if ($tutupbuka->save()) {
+            return back();
+        } else {
+            return back()->withErrors(['msg', 'Error when update TutupBuka']);
+        }
     }
 }
