@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\TutupBuka;
 use App\Company;
 use App\Leader;
@@ -33,31 +34,43 @@ class PageController extends Controller
         if (view()->exists("pages.{$page}.{$page}_list")) {
             switch ($page) {
                 case 'company':
-                    $index_data = Company::sortable()->paginate(20);
+                    $index_data  = Company::sortable()->paginate(20);
                     $filters     = ['nama_company' => 'Company'];
                     break;
                 case 'aplikasi':
-                    $index_data = Apps::sortable()->paginate(20);
+                    $index_data  = Apps::sortable()->paginate(20);
                     $filters     = ['nama_apps' => 'Aplikasi', 'link' => 'Link Apps', 'nama_company' => 'Company'];
                     break;
                 case 'divisi':
-                    $index_data = Divisi::sortable()->paginate(20);
+                    $index_data  = Divisi::sortable()->paginate(20);
                     $filters     = ['nama_divisi' => 'Divisi', 'nama_aplikasi' => 'Aplikasi'];
                     break;
                 case 'leader':
-                    $index_data = Leader::sortable()->paginate(20);
+                    $index_data  = Leader::sortable()->paginate(20);
                     $filters     = ['username' => 'Username', 'nama_aplikasi' => 'Aplikasi'];
                     break;
                 case 'anak':
-                    $index_data = Anak::sortable()->paginate(20);
+                    $index_data  = Anak::sortable()->paginate(20);
                     $filters     = ['username' => 'Username', 'nama_aplikasi' => 'Aplikasi', 'divisi' => 'Divisi', 'leader' => 'Leader'];
                     break;
                 case 'tutupbuka':
-                    $index_data = TutupBuka::sortable()->paginate(20);
+                    $index_data  = TutupBuka::sortable()->paginate(20);
                     $filters     = ['anak' => 'Anak'];
                     break;
+                case 'dashboard':
+                    $now = Carbon::now();
+                    $index_data  = [
+                        'tutup_today'   => TutupBuka::whereDate('tanggal_tutup', Carbon::today())->count(),
+                        'tutup_month'   => TutupBuka::whereMonth('tanggal_tutup', $now->month)->count(),
+                        'buka_today'    => TutupBuka::whereDate('tanggal_buka', Carbon::today())->count(),
+                        'buka_month'    => TutupBuka::whereMonth('tanggal_buka', $now->month)->count(),
+                        'current_tutup' => TutupBuka::orderBy('tanggal_tutup', 'desc')->limit(10)->get(),
+                        'current_buka'  => TutupBuka::orderBy('tanggal_buka', 'desc')->limit(10)->get(),
+                    ];
+                    $filters     = [];
+                    break;
                 default:
-                    $index_data = [];
+                    $index_data  = [];
                     $filters     = [];
                     break;
             }
