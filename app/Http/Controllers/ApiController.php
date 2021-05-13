@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Helpers\ApiHelper;
+use App\Http\Controllers\AjaxElements\AjaxInput;
 use App\Apps;
 use App\Anak;
 use App\Divisi;
@@ -29,50 +31,22 @@ class ApiController extends Controller
      * @param string $page
      * @return \Illuminate\View\View
      */
-    public function apiDivisi(string $page, string $id)
-    {
-        $divisis = Divisi::where('id_apps', $id)->get();
-        $html = '
-        <div class="row row--divisi">
-            <label class="col-md-3 col-form-label">Divisi</label>
-            <div class="col-md-9">
-                <div class="form-group">
-                    <select id="select--divisi" name="divisi" class="form-control">
-                        <option value="0"></option>';
-        foreach ($divisis as $divisi) {
-            $row = '<option value="'. $divisi->id_divisi. '">'. $divisi->nama_divisi. '</option>';
-            $html .= $row;
+    
+     public function apiAjax(string $page, string $id, string $e_id)
+     {
+        switch ($page) {
+            case 'divisi':
+                return AjaxInput::apiInputDivisi($page, $id, $e_id);
+                break;
+            case 'leader':
+                return AjaxInput::apiInputLeader($page, $id, $e_id);
+                break;
+            default:
+                break;
         }
-        $html .= '
-                    </select>
-                </div>
-            </div>
-        </div>';
 
-        return $html;
-    }
-
-    public function apiLeader(string $page, string $id) {
-        $leaders = Leader::where('id_apps', $id)->get();
-        $html = '
-        <div class="row row--leader">
-            <label class="col-md-3 col-form-label">Leader</label>
-            <div class="col-md-9">
-                <div class="form-group">
-                    <select id="select--leader" name="leader" class="form-control">
-                        <option value="0"></option>';
-        foreach ($leaders as $leader) {
-            $row = '<option value="'. $leader->id_leader. '">'. $leader->username. '</option>';
-            $html .= $row;
-        }
-        $html .= '
-                    </select>
-                </div>
-            </div>
-        </div>';
-
-        return $html;
-    }
+        return '';
+     }
 
     public function apiTutupBuka(string $page, string $id, Request $request)
     {
@@ -130,5 +104,23 @@ class ApiController extends Controller
         }
 
         return back();
+    }
+
+    public function apiEdit(string $page, string $id, Request $request)
+    {
+        switch ($page) {
+            case 'company':
+                $editData = Company::where('id_company', $id)->first();
+                ApiHelper::saveCompany($request, $editData);
+                break;
+            case 'anak':
+                $editData = Anak::where('id_anak', $id)->first();
+                ApiHelper::saveAnak($request, $editData);
+                break;
+            default:
+                break;
+        }
+
+        return redirect()->route('page.index', $page);
     }
 }
