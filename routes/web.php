@@ -36,5 +36,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('{page}/api/divisi/{id}', ['as' => 'api.divisi', 'uses' => 'ApiController@apiDivisi']);
 	Route::get('{page}/api/leader/{id}', ['as' => 'api.leader', 'uses' => 'ApiController@apiLeader']);
 	Route::post('{page}/api/tutupbuka/{id}', ['as' => 'api.tutupbuka', 'uses' => 'ApiController@apiTutupBuka']);
+	Route::delete('{page}/api/{id}', ['as' => 'api.delete', 'uses' => 'ApiController@apiDelete']);
 });
 

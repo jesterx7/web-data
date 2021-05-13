@@ -54,6 +54,9 @@
                                     <th>
                                         @sortablelink('companies.nama_company', 'Company')
                                     </th>
+                                    <th class="table-view--head__edit-delete">
+                                        Edit / Delete
+                                    </th>
                                 </thead>
                                 <tbody>
                                 @foreach($index_data as $data)
@@ -62,6 +65,7 @@
                                         <td>{{ $data->nama_apps }}</td>
                                         <td>{{ $data->link_apps }}</td>
                                         <td>{{ $data->companies->nama_company }}</td>
+                                        <td class="table-view--body__edit-delete">@include('components.action-button.edit-delete', ['page' => $page, 'id' => $data->id_apps])</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

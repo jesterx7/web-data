@@ -34,23 +34,23 @@ class PageController extends Controller
         if (view()->exists("pages.{$page}.{$page}_list")) {
             switch ($page) {
                 case 'company':
-                    $index_data  = Company::sortable()->paginate(20);
+                    $index_data  = Company::where('status', 'ON')->sortable()->paginate(20);
                     $filters     = ['nama_company' => 'Company'];
                     break;
                 case 'aplikasi':
-                    $index_data  = Apps::sortable()->paginate(20);
+                    $index_data  = Apps::where('status', 'ON')->sortable()->paginate(20);
                     $filters     = ['nama_apps' => 'Aplikasi', 'link' => 'Link Apps', 'nama_company' => 'Company'];
                     break;
                 case 'divisi':
-                    $index_data  = Divisi::sortable()->paginate(20);
+                    $index_data  = Divisi::where('status', 'ON')->sortable()->paginate(20);
                     $filters     = ['nama_divisi' => 'Divisi', 'nama_aplikasi' => 'Aplikasi'];
                     break;
                 case 'leader':
-                    $index_data  = Leader::sortable()->paginate(20);
+                    $index_data  = Leader::where('status', 'ON')->sortable()->paginate(20);
                     $filters     = ['username' => 'Username', 'nama_aplikasi' => 'Aplikasi'];
                     break;
                 case 'anak':
-                    $index_data  = Anak::sortable()->paginate(20);
+                    $index_data  = Anak::where('status', 'ON')->sortable()->paginate(20);
                     $filters     = ['username' => 'Username', 'nama_aplikasi' => 'Aplikasi', 'divisi' => 'Divisi', 'leader' => 'Leader'];
                     break;
                 case 'tutupbuka':
@@ -70,12 +70,13 @@ class PageController extends Controller
                     $filters     = [];
                     break;
                 default:
+                    $page        = '';
                     $index_data  = [];
                     $filters     = [];
                     break;
             }
 
-            return view("pages.{$page}.{$page}_list", ["index_data" => $index_data, "filters" => $filters]);
+            return view("pages.{$page}.{$page}_list", ["index_data" => $index_data, "filters" => $filters, 'page' => $page]);
         }
 
         return abort(404);
