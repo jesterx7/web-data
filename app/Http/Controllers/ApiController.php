@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Apps;
+use App\Anak;
 use App\Divisi;
 use App\Leader;
+use App\Company;
 use App\TutupBuka;
 use Carbon\Carbon;
 
@@ -92,5 +95,40 @@ class ApiController extends Controller
         } else {
             return back()->withErrors(['msg', 'Error when update TutupBuka']);
         }
+    }
+
+    public function apiDelete(string $page, string $id)
+    {
+        switch ($page) {
+            case 'company':
+                $deleteData = Company::where('id_company', $id)->first();
+                $deleteData->status = 'OFF';
+                $deleteData->save();
+                break;
+            case 'aplikasi':
+                $deleteData = Apps::where('id_apps', $id)->first();
+                $deleteData->status = 'OFF';
+                $deleteData->save();
+                break;
+            case 'divisi':
+                $deleteData = Divisi::where('id_divisi', $id)->first();
+                $deleteData->status = 'OFF';
+                $deleteData->save();
+                break;
+            case 'leader':
+                $deleteData = Leader::where('id_leader', $id)->first();
+                $deleteData->status = 'OFF';
+                $deleteData->save();
+                break;
+            case 'anak':
+                $deleteData = Anak::where('id_anak', $id)->first();
+                $deleteData->status = 'OFF';
+                $deleteData->save();
+                break;
+            default:
+                break;
+        }
+
+        return back();
     }
 }

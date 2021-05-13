@@ -48,12 +48,16 @@
                                     <th>
                                         @sortablelink('nama_company', 'Company')
                                     </th>
+                                    <th class="table-view--head__edit-delete">
+                                        Edit / Delete
+                                    </th>
                                 </thead>
                                 <tbody>
                                     @foreach($index_data as $data)
                                         <tr>
                                             <td>{{ $data->id_company }}</td>
                                             <td>{{ $data->nama_company }}</td>
+                                            <td class="table-view--body__edit-delete">@include('components.action-button.edit-delete', ['page' => $page, 'id' => $data->id_company])</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -35,3 +35,29 @@
 .btn-dashboard--see-all {
 	color : #51cbce;
 }
+
+.btn-action--delete {
+	background-color: #f55b5b;
+	color: #ffffff;
+	width: 100%;
+}
+
+.btn-action--edit {
+	background-color: #6bff7f;
+	color: #ffffff;
+	width: 100%;
+}
+
+.table-view--head__edit-delete {
+	text-align: center;
+}
+
+.table-view--body__edit-delete {
+	text-align: center;
+}
+
+.edit-delete--item {
+	display: inline-block;
+	text-align: center;
+	margin: 5px 10px;
+}

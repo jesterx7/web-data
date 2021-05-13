@@ -52,18 +52,17 @@
                                         @sortablelink('password', 'Password')
                                     </th>
                                     <th>
-                                        @sortablelink('apps.nama_apps', 'Apps')
-                                    </th>
-                                    <th>
                                         @sortablelink('divisi.nama_divisi', 'Divisi')
                                     </th>
                                     <th>
                                         @sortablelink('leaders.username', 'Leader')
                                     </th>
+                                    <th class="table-view--head__edit-delete">
+                                        Edit / Delete
+                                    </th>
                                     <th>
                                         Action
                                     </th>
-                                    <th>
                                 </thead>
                                 <tbody>
                                 @foreach($index_data as $data)
@@ -71,9 +70,9 @@
                                         <td>{{ $data->id_anak }}</td>
                                         <td>{{ $data->username }}</td>
                                         <td>{{ $data->password }}</td>
-                                        <td>{{ $data->apps->nama_apps }}</td>
                                         <td>{{ $data->divisi->nama_divisi }}</td>
                                         <td>{{ $data->leaders->username }}</td>
+                                        <td class="table-view--body__edit-delete">@include('components.action-button.edit-delete', ['page' => $page, 'id' => $data->id_anak])</td>
                                         @if ($data->tutupbuka->last())
                                             @if ($data->tutupbuka->last()->tanggal_buka != '9999-12-31 00:00:00')
                                             <td>
