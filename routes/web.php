@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('{page}', ['as' => 'page.index', 'uses' => 'PageController@index']);
 	Route::get('{page}/add', ['as' => 'page.add', 'uses' => 'PageController@add']);
+	Route::get('{page}/edit/{id}', ['as' => 'page.edit', 'uses' => 'PageController@edit']);
 	Route::post('{page}', ['as' => 'page.save', 'uses' => 'PageController@save']);
 	Route::post('{page}/import', ['as' => 'page.import', 'uses' => 'ImportController@import']);
 });
@@ -33,9 +34,9 @@ Route::group(['middleware' => 'auth'], function () {
 /* API Routes */
 
 Route::group(['middleware' => 'auth'], function () {
-	Route::get('{page}/api/divisi/{id}', ['as' => 'api.divisi', 'uses' => 'ApiController@apiDivisi']);
-	Route::get('{page}/api/leader/{id}', ['as' => 'api.leader', 'uses' => 'ApiController@apiLeader']);
+	Route::get('{page}/api/{id}/{e_id}', ['as' => 'api.ajax', 'uses' => 'ApiController@apiAjax']);
 	Route::post('{page}/api/tutupbuka/{id}', ['as' => 'api.tutupbuka', 'uses' => 'ApiController@apiTutupBuka']);
 	Route::delete('{page}/api/{id}', ['as' => 'api.delete', 'uses' => 'ApiController@apiDelete']);
+	Route::put('{page}/api/{id}', ['as' => 'api.edit', 'uses' => 'ApiController@apiEdit']);
 });
 

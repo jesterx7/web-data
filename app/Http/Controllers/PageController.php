@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Http\Controllers\Helpers\ApiHelper;
 use App\TutupBuka;
 use App\Company;
 use App\Leader;
@@ -106,102 +107,55 @@ class PageController extends Controller
         return abort(404);
     }
 
+    public function edit(string $page, string $id)
+    {
+        if (view()->exists("pages.{$page}.{$page}_add")) {
+            switch ($page) {
+                case 'company':
+                    $data = Company::where('id_company', $id)->first();
+                    return view("pages.{$page}.{$page}_edit", ['data' => $data, 'id' => $id]);
+                case 'aplikasi':
+                    $companies = Company::all();
+                    return view("pages.{$page}.{$page}_edit", ['companies' => $companies]);
+                case 'divisi':
+                    $apps = Apps::all();
+                    return view("pages.{$page}.{$page}_edit", ['apps' => $apps]);
+                case 'leader':
+                    $apps = Apps::all();
+                    return view("pages.{$page}.{$page}_edit", ['apps' => $apps]);
+                case 'anak':
+                    $data = Anak::where('id_anak', $id)->first();
+                    $apps = Apps::all();
+                    return view("pages.{$page}.{$page}_edit", ['apps' => $apps, 'data' => $data, 'id' => $id]);
+                default:
+                    return view("pages.{$page}.{$page}_edit");
+            }
+        }
+
+        return abort(404);
+    }
+
     public function save(string $page, Request $request) {
         switch ($page) {
             case 'company':
-                $this->saveCompany($request);
+                ApiHelper::saveCompany($request, new Company);
                 break;
             case 'aplikasi':
-                $this->saveAplikasi($request);
+                ApiHelper::saveAplikasi($request, new Apps);
                 break;
             case 'divisi':
-                $this->saveDivisi($request);
+                ApiHelper::saveDivisi($request, new Divisi);
                 break;
             case 'leader':
-                $this->saveLeader($request);
+                ApiHelper::saveLeader($request, new Leader);
                 break;
             case 'anak':
-                $this->saveAnak($request);
+                ApiHelper::saveAnak($request, new Anak);
                 break;
             default:
                 break;
         }
 
         return $this->index($page);
-    }
-
-    public function saveCompany(Request $request) {
-        $this->validate($request, [
-            'nama_company'  => 'required'
-        ]);
-
-        $company = new Company;
-        $company->nama_company = $request->get('nama_company');
-        
-        return $company->save();
-    }
-
-    public function saveAplikasi(Request $request) {
-        $this->validate($request, [
-            'nama_aplikasi' => 'required',
-            'company'       => 'required'
-        ]);
-
-        $apps = new Apps;
-        $apps->nama_apps        = $request->get('nama_aplikasi');
-        $apps->link_apps        = $request->get('link');
-        $apps->id_company       = $request->get('company');
-
-        return $apps->save();
-    }
-
-    public function saveDivisi(Request $request) {
-        $this->validate($request, [
-            'nama_divisi'   => 'required',
-            'apps'          => 'required'
-        ]);
-
-        $divisi = new Divisi;
-        $divisi->nama_divisi    = $request->get('nama_divisi');
-        $divisi->id_apps        = $request->get('apps');
-        $divisi->status         = 'ON';
-
-        return $divisi->save();
-    }
-
-    public function saveLeader(Request $request) {
-        $this->validate($request, [
-            'username'  => 'required',
-            'password'  => 'required',
-            'apps'      => 'required'   
-        ]);
-
-        $leader = new Leader;
-        $leader->username   = $request->get('username');
-        $leader->password   = $request->get('password');
-        $leader->id_apps    = $request->get('apps');
-        $leader->status     = 'ON';
-
-        return $leader->save();
-    }
-
-    public function saveAnak(Request $request) {
-        $this->validate($request, [
-            'username'  => 'required',
-            'password'  => 'required',
-            'apps'      => 'required|not_in:0',
-            'divisi'    => 'required|not_in:0',
-            'leader'    => 'required|not_in:0'
-        ]);
-
-        $anak = new Anak;
-        $anak->username     = $request->get('username');
-        $anak->password     = $request->get('password');
-        $anak->id_apps      = $request->get('apps');
-        $anak->id_divisi    = $request->get('divisi');
-        $anak->id_leader    = $request->get('leader');
-        $anak->status       = 'ON';
-
-        return $anak->save();
     }
 }

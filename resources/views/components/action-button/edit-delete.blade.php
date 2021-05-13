@@ -9,12 +9,8 @@
         </form>
     </div>
     <div class="edit-delete--item">
-        <form method="post" action="{{ route('api.delete', [$page, $id]) }}">
-            @csrf
-            @method('PUT')
-            <button type="submit" class="btn btn-info btn-fill btn-action--edit">
-                <i class="nc-icon nc-share-66"></i>
-            </button>
-        </form>
+        <a href="{{ route('page.edit', [$page, $id]) }}" class="btn btn-info btn-fill btn-action--edit">
+            <i class="nc-icon nc-share-66"></i>
+        </a>
     </div>
 </div>
