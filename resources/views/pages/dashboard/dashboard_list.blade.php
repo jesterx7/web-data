@@ -17,7 +17,7 @@
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <p class="card-category">Tutup</p>
+                                    <p class="card-category">Close / 关</p>
                                     <p class="card-title">{{ $index_data['tutup_today'] }}<p>
                                 </div>
                             </div>
@@ -42,7 +42,7 @@
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <p class="card-category">Buka</p>
+                                    <p class="card-category">Open / 开</p>
                                     <p class="card-title">{{ $index_data['buka_today'] }}<p>
                                 </div>
                             </div>
@@ -67,7 +67,7 @@
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <p class="card-category">Tutup</p>
+                                    <p class="card-category">Close / 关</p>
                                     <p class="card-title">{{ $index_data['tutup_month'] }}<p>
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <p class="card-category">Buka</p>
+                                    <p class="card-category">Open / 开</p>
                                     <p class="card-title">{{ $index_data['buka_month'] }}<p>
                                 </div>
                             </div>
@@ -111,8 +111,8 @@
             <div class="col-md-6">
                 <div class="card ">
                     <div class="card-header ">
-                        <h5 class="card-title">Lastest Tutup</h5>
-                        <p class="card-category">10 Lastest Tutup</p>
+                        <h5 class="card-title">Lastest Close / 今天关的账号</h5>
+                        <p class="card-category">10 Lastest Close</p>
                     </div>
                     <div class="card-body ">
                         <table class="table">
@@ -121,7 +121,7 @@
                                     Username
                                 </th>
                                 <th>
-                                    Tanggal Tutup
+                                    Close Date / 截止日期
                                 </th>
                             </thead>
                             <tbody>
@@ -147,8 +147,8 @@
             <div class="col-md-6">
                 <div class="card ">
                     <div class="card-header ">
-                        <h5 class="card-title">Lastest Buka</h5>
-                        <p class="card-category">10 Lastest Buka</p>
+                        <h5 class="card-title">Lastest Open / 今天开的账号</h5>
+                        <p class="card-category">10 Lastest Open</p>
                     </div>
                     <div class="card-body ">
                         <table class="table">
@@ -157,7 +157,7 @@
                                     Username
                                 </th>
                                 <th>
-                                    Tanggal Buka
+                                    Open Date / 开馆日
                                 </th>
                             </thead>
                             <tbody>

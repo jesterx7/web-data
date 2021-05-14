@@ -26,13 +26,13 @@
             <li class="{{ $elementActive == 'divisi' ? 'active' : '' }}">
                 <a href="{{ route('page.index', 'divisi') }}">
                     <i class="nc-icon nc-chart-bar-32"></i>
-                    <p>Divisi</p>
+                    <p>Division</p>
                 </a>
             </li>
             <li class="{{ $elementActive == 'aplikasi' ? 'active' : '' }}">
                 <a href="{{ route('page.index', 'aplikasi') }}">
                     <i class="nc-icon nc-app"></i>
-                    <p>Aplikasi</p>
+                    <p>Apps</p>
                 </a>
             </li>
             <li class="{{ $elementActive == 'leader' ? 'active' : '' }}">
@@ -44,13 +44,13 @@
             <li class="{{ $elementActive == 'anak' ? 'active' : '' }}">
                 <a href="{{ route('page.index', 'anak') }}">
                     <i class="nc-icon nc-badge"></i>
-                    <p>Anak</p>
+                    <p>Staff</p>
                 </a>
             </li>
             <li class="{{ $elementActive == 'tutupbuka' ? 'active' : '' }}">
                 <a href="{{ route('page.index', 'tutupbuka') }}">
                     <i class="nc-icon nc-bullet-list-67"></i>
-                    <p>TutupBuka</p>
+                    <p>Close & Open</p>
                 </a>
             </li>
         </ul>
