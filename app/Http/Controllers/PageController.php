@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Http\Controllers\Helpers\ApiHelper;
+use App\Http\Controllers\Preparer\ContentPreparer;
 use App\TutupBuka;
 use App\Company;
 use App\Leader;
@@ -37,26 +38,66 @@ class PageController extends Controller
                 case 'company':
                     $index_data  = Company::where('status', 'ON')->sortable()->paginate(20);
                     $filters     = ['nama_company' => 'Company'];
+                    $table_head  = [
+                        'id_company'    => 'ID',
+                        'nama_company'  => 'Company',
+                        'del_edit'      => 'Edit / Delete'
+                    ];
                     break;
                 case 'aplikasi':
                     $index_data  = Apps::where('status', 'ON')->sortable()->paginate(20);
-                    $filters     = ['nama_apps' => 'Aplikasi', 'link' => 'Link Apps', 'nama_company' => 'Company'];
+                    $filters     = ['nama_apps' => 'Apps', 'link' => 'Link Apps', 'nama_company' => 'Company'];
+                    $table_head  = [
+                        'id_apps'                   => 'ID',
+                        'nama_apps'                 => 'Apps',
+                        'link_apps'                 => 'Link',
+                        'companies.nama_company'    => 'Company',
+                        'del_edit'                  => 'Edit / Delete'
+                    ];
                     break;
                 case 'divisi':
                     $index_data  = Divisi::where('status', 'ON')->sortable()->paginate(20);
-                    $filters     = ['nama_divisi' => 'Divisi', 'nama_aplikasi' => 'Aplikasi'];
+                    $filters     = ['nama_divisi' => 'Division', 'nama_aplikasi' => 'Apps'];
+                    $table_head  = [
+                        'id_divisi'         => 'ID',
+                        'nama_divisi'       => 'Division',
+                        'apps.nama_apps'    => 'Apps',
+                        'del_edit'          => 'Edit / Delete'
+                    ];
                     break;
                 case 'leader':
                     $index_data  = Leader::where('status', 'ON')->sortable()->paginate(20);
-                    $filters     = ['username' => 'Username', 'nama_aplikasi' => 'Aplikasi'];
+                    $filters     = ['username' => 'Username', 'nama_aplikasi' => 'Apps'];
+                    $table_head  = [
+                        'id_leader'         => 'ID',
+                        'username'          => 'Username',
+                        'password'          => 'Password',
+                        'apps.nama_apps'    => 'Apps',
+                        'del_edit'          => 'Edit / Delete'
+                    ];
                     break;
                 case 'anak':
                     $index_data  = Anak::where('status', 'ON')->sortable()->paginate(20);
-                    $filters     = ['username' => 'Username', 'nama_aplikasi' => 'Aplikasi', 'divisi' => 'Divisi', 'leader' => 'Leader'];
+                    $filters     = ['username' => 'Username', 'nama_aplikasi' => 'Apps', 'divisi' => 'Division', 'leader' => 'Leader'];
+                    $table_head  = [
+                        'id_anak'               => 'ID',
+                        'username'              => 'Username',
+                        'password'              => 'Password',
+                        'divisi.nama_divisi'    => 'Division',
+                        'leaders.username'      => 'Leader',
+                        'action'                => 'Action',
+                        'del_edit'              => 'Edit / Delete'
+                    ];
                     break;
                 case 'tutupbuka':
                     $index_data  = TutupBuka::sortable()->paginate(20);
-                    $filters     = ['anak' => 'Anak'];
+                    $filters     = ['anak' => 'Staff'];
+                    $table_head  = [
+                        'id_tutupbuka'  => 'ID',
+                        'anak.username' => 'Staff',
+                        'tanggal_tutup' => 'Close Date',
+                        'tanggal_buka'  => 'Open Date'
+                    ];
                     break;
                 case 'dashboard':
                     $now = Carbon::now();
@@ -69,15 +110,24 @@ class PageController extends Controller
                         'current_buka'  => TutupBuka::orderBy('tanggal_buka', 'desc')->limit(10)->get(),
                     ];
                     $filters     = [];
+                    $table_head  = [];
                     break;
                 default:
                     $page        = '';
                     $index_data  = [];
                     $filters     = [];
+                    $table_head  = [];
                     break;
             }
 
-            return view("pages.{$page}.{$page}_list", ["index_data" => $index_data, "filters" => $filters, 'page' => $page]);
+            list($filters, $table_head) = $this->prepareList($filters, $table_head);
+
+            return view("pages.{$page}.{$page}_list", [
+                'index_data'    => $index_data,
+                'filters'       => $filters,
+                'page'          => $page,
+                'table_head'    => $table_head
+            ]);
         }
 
         return abort(404);
@@ -157,5 +207,13 @@ class PageController extends Controller
         }
 
         return $this->index($page);
+    }
+
+    private function prepareList(array $filters, array $table_head)
+    {
+        $filters     = ContentPreparer::addChineseCharacter($filters);
+        $table_head  = ContentPreparer::addChineseCharacter($table_head);
+        
+        return array($filters, $table_head);
     }
 }
