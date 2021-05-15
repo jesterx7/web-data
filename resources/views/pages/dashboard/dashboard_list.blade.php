@@ -111,8 +111,8 @@
             <div class="col-md-6">
                 <div class="card ">
                     <div class="card-header ">
-                        <h5 class="card-title">Lastest Close / 今天关的账号</h5>
-                        <p class="card-category">10 Lastest Close</p>
+                        <h5 class="card-title">Latest Close / 今天关的账号</h5>
+                        <p class="card-category">10 Latest Close</p>
                     </div>
                     <div class="card-body ">
                         <table class="table">
@@ -147,8 +147,8 @@
             <div class="col-md-6">
                 <div class="card ">
                     <div class="card-header ">
-                        <h5 class="card-title">Lastest Open / 今天开的账号</h5>
-                        <p class="card-category">10 Lastest Open</p>
+                        <h5 class="card-title">Latest Open / 今天开的账号</h5>
+                        <p class="card-category">10 Latest Open</p>
                     </div>
                     <div class="card-body ">
                         <table class="table">
