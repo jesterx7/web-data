@@ -30,7 +30,7 @@ class LeaderImport implements ToModel, WithHeadingRow, WithValidation
     public function rules(): array
     {
         return [
-            '*.nama_apps'    => ['string', 'exists:apps,nama_apps']
+            '*.nama_apps'    => ['required', 'exists:apps,nama_apps']
         ];
     }
 }

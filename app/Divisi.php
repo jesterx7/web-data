@@ -33,6 +33,6 @@ class Divisi extends Eloquent
 
     public function anak()
     {
-        return $this->hasMany('App\Anak', 'id_anak');
+        return $this->hasMany('App\Anak', 'id_divisi');
     }
 }

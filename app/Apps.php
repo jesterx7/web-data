@@ -38,11 +38,11 @@ class Apps extends Eloquent
 
     public function leaders()
     {
-        return $this->hasMany('App\Leader', 'id_leader');
+        return $this->hasMany('App\Leader', 'id_apps');
     }
 
     public function anaks()
     {
-        return $this->hasMany('App\Anak', 'id_anak');
+        return $this->hasMany('App\Anak', 'id_apps');
     }
 }
