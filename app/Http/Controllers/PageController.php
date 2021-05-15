@@ -93,10 +93,11 @@ class PageController extends Controller
                     $index_data  = TutupBuka::sortable()->paginate(20);
                     $filters     = ['anak' => 'Staff'];
                     $table_head  = [
-                        'id_tutupbuka'  => 'ID',
-                        'anak.username' => 'Staff',
-                        'tanggal_tutup' => 'Close Date',
-                        'tanggal_buka'  => 'Open Date'
+                        'id_tutupbuka'          => 'ID',
+                        'anak.username'         => 'Staff',
+                        'apps'                  => 'Apps',
+                        'tanggal_tutup'         => 'Close Date',
+                        'tanggal_buka'          => 'Open Date'
                     ];
                     break;
                 case 'dashboard':
