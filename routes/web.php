@@ -12,6 +12,9 @@
 */
 
 Route::get('/', function () {
+	if (Auth::check()) {
+		return redirect()->route('page.index', 'dashboard');
+	}
     return view('auth/login');
 });
 Auth::routes();

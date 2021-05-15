@@ -123,12 +123,16 @@
                                 <th>
                                     Close Date / 截止日期
                                 </th>
+                                <th>
+                                    Apps
+                                </th>
                             </thead>
                             <tbody>
                                 @foreach($index_data['current_tutup'] as $tutup)
                                     <tr>
                                         <td>{{ $tutup->anak->username }}
                                         <td>{{ $tutup->tanggal_tutup }}</td>
+                                        <td>{{ $tutup->anak->apps->nama_apps }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -159,12 +163,16 @@
                                 <th>
                                     Open Date / 开馆日
                                 </th>
+                                <th>
+                                    Apps
+                                </th>
                             </thead>
                             <tbody>
                                 @foreach($index_data['current_buka'] as $buka)
                                     <tr>
                                         <td>{{ $buka->anak->username }}
                                         <td>{{ $buka->tanggal_buka }}</td>
+                                        <td>{{ $buka->anak->apps->nama_apps }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
