@@ -5,6 +5,7 @@
             <tr>
                 <td>{{ $data->id_tutupbuka }}</td>
                 <td>{{ $data->anak->username }}</td>
+                <td>{{ $data->anak->apps->nama_apps }}</td>
                 <td>{{ $data->tanggal_tutup }}</td>
                 <td>{{ $data->tanggal_buka }}</td>
             </tr>

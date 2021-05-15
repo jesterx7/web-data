@@ -23,11 +23,19 @@ class TutupBuka extends Eloquent
     ];
 
     public $sortable = [
-        'id_tutupbuka', 'tanggal_tutup', 'tanggal_buka'
+        'id_tutupbuka', 'tanggal_tutup', 'tanggal_buka', 'apps'
     ];
 
     public function anak()
     {
         return $this->belongsTo('App\Anak', 'id_anak');
+    }
+    
+    protected function appsSortable($query, $order)
+    {
+        return $query->join('anak', 'tutup_buka.id_anak', '=', 'anak.id_anak')
+                     ->join('apps', 'anak.id_apps', '=', 'apps.id_apps')
+                     ->orderBy('apps.nama_apps', $order)
+                     ->select('tutup_buka.*');
     }
 }
