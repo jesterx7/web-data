@@ -36,7 +36,7 @@ class PageController extends Controller
         if (view()->exists("pages.{$page}.{$page}_list")) {
             switch ($page) {
                 case 'company':
-                    $index_data  = Company::where('status', 'ON')->sortable()->paginate(20);
+                    $index_data  = Company::where('companies.status', 'ON')->sortable()->paginate(20);
                     $filters     = ['nama_company' => 'Company'];
                     $table_head  = [
                         'id_company'    => 'ID',
@@ -45,7 +45,7 @@ class PageController extends Controller
                     ];
                     break;
                 case 'aplikasi':
-                    $index_data  = Apps::where('status', 'ON')->sortable()->paginate(20);
+                    $index_data  = Apps::where('apps.status', 'ON')->sortable()->paginate(20);
                     $filters     = ['nama_apps' => 'Apps', 'link' => 'Link Apps', 'nama_company' => 'Company'];
                     $table_head  = [
                         'id_apps'                   => 'ID',
@@ -56,7 +56,7 @@ class PageController extends Controller
                     ];
                     break;
                 case 'divisi':
-                    $index_data  = Divisi::where('status', 'ON')->sortable()->paginate(20);
+                    $index_data  = Divisi::where('divisi.status', 'ON')->sortable()->paginate(20);
                     $filters     = ['nama_divisi' => 'Division', 'nama_aplikasi' => 'Apps'];
                     $table_head  = [
                         'id_divisi'         => 'ID',
@@ -66,7 +66,7 @@ class PageController extends Controller
                     ];
                     break;
                 case 'leader':
-                    $index_data  = Leader::where('status', 'ON')->sortable()->paginate(20);
+                    $index_data  = Leader::where('leaders.status', 'ON')->sortable()->paginate(20);
                     $filters     = ['username' => 'Username', 'nama_aplikasi' => 'Apps'];
                     $table_head  = [
                         'id_leader'         => 'ID',
@@ -77,7 +77,7 @@ class PageController extends Controller
                     ];
                     break;
                 case 'anak':
-                    $index_data  = Anak::where('status', 'ON')->sortable()->paginate(20);
+                    $index_data  = Anak::where('anak.status', 'ON')->sortable()->paginate(20);
                     $filters     = ['username' => 'Username', 'nama_aplikasi' => 'Apps', 'divisi' => 'Division', 'leader' => 'Leader'];
                     $table_head  = [
                         'id_anak'               => 'ID',

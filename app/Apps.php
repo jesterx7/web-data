@@ -33,7 +33,7 @@ class Apps extends Eloquent
 
     public function apps()
     {
-        return $this->hasMany('App\Divisi', 'id_apps');
+        return $this->hasMany('App\Divisi', 'id_divisi');
     }
 
     public function leaders()

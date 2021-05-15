@@ -26,7 +26,7 @@
             <li class="{{ $elementActive == 'divisi' ? 'active' : '' }}">
                 <a href="{{ route('page.index', 'divisi') }}">
                     <i class="nc-icon nc-chart-bar-32"></i>
-                    <p>Division</p>
+                    <p>Division / 阶段</p>
                 </a>
             </li>
             <li class="{{ $elementActive == 'aplikasi' ? 'active' : '' }}">
@@ -38,19 +38,19 @@
             <li class="{{ $elementActive == 'leader' ? 'active' : '' }}">
                 <a href="{{ route('page.index', 'leader') }}">
                     <i class="nc-icon nc-single-02"></i>
-                    <p>Leader</p>
+                    <p>Leader / 组长</p>
                 </a>
             </li>
             <li class="{{ $elementActive == 'anak' ? 'active' : '' }}">
                 <a href="{{ route('page.index', 'anak') }}">
                     <i class="nc-icon nc-badge"></i>
-                    <p>Staff</p>
+                    <p>Staff / 员工账号</p>
                 </a>
             </li>
             <li class="{{ $elementActive == 'tutupbuka' ? 'active' : '' }}">
                 <a href="{{ route('page.index', 'tutupbuka') }}">
                     <i class="nc-icon nc-bullet-list-67"></i>
-                    <p>Close & Open</p>
+                    <p>Close & Open / 关 & 开</p>
                 </a>
             </li>
         </ul>

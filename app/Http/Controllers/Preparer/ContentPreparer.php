@@ -17,8 +17,8 @@ class ContentPreparer extends Controller
             'Staff'             => 'Staff / 员工账号',
             'Close Date'        => 'Close Date / 截止日期',
             'Open Date'         => 'Open Date / 开馆日',
-            'Lastest Open'      => 'Lastest Open / 今天开的账号',
-            'Lastest Close'     => 'Lastest Close / 今天关的账号',
+            'Latest Open'       => 'Latest Open / 今天开的账号',
+            'Latest Close'      => 'Latest Close / 今天关的账号',
         ];
 
         foreach ($words as $key => $word) {
