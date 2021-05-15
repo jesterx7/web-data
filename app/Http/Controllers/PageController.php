@@ -84,7 +84,7 @@ class PageController extends Controller
                         'username'              => 'Username',
                         'password'              => 'Password',
                         'divisi.nama_divisi'    => 'Division',
-                        'leaders.username'      => 'Leader',
+                        'apps.nama_apps'        => 'Apps',
                         'action'                => 'Action',
                         'del_edit'              => 'Edit / Delete'
                     ];

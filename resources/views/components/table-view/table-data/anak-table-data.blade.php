@@ -7,7 +7,7 @@
                 <td>{{ $data->username }}</td>
                 <td>{{ $data->password }}</td>
                 <td>{{ $data->divisi->nama_divisi }}</td>
-                <td>{{ $data->leaders->username }}</td>
+                <td>{{ $data->apps->nama_apps }}</td>
                 @if ($data->tutupbuka->last())
                     @if ($data->tutupbuka->last()->tanggal_buka != '9999-12-31 00:00:00')
                     <td>
