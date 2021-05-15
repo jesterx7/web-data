@@ -17,9 +17,9 @@ class AnakImport implements ToCollection, WithHeadingRow
     public function collection(Collection $rows)
     {
         Validator::make($rows->toArray(), [
-            '*.nama_apps'               => ['string', 'exists:apps,nama_apps'],
-            '*.nama_divisi'             => ['string', 'exists:divisi,nama_divisi'],
-            '*.username_leader'         => ['string', 'exists:leaders,username']
+            '*.nama_apps'               => ['required', 'exists:apps,nama_apps'],
+            '*.nama_divisi'             => ['required', 'exists:divisi,nama_divisi'],
+            '*.username_leader'         => ['required', 'exists:leaders,username']
         ])->validate();
         foreach ($rows as $key => $row) {
             $validator = new ImportValidator();
