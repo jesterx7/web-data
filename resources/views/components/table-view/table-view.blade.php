@@ -21,7 +21,7 @@
         </thead>
         @yield('table-body')
     </table>
-    {{ $index_data->links() }}
+    {{ $index_data->appends(Request::only('option', 'search'))->links() }}
     
     @if ($page != 'dashboard')
         @include('components.form.import_export-form')

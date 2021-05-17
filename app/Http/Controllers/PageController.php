@@ -236,7 +236,6 @@ class PageController extends Controller
                                         ->where($column, 'LIKE', '%'. $filter. '%')
                                         ->sortable()->paginate(20);
                 break;
-                break;
             default:
                 $page        = '';
                 $index_data  = [];
