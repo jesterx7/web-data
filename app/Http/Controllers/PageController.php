@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Http\Controllers\Helpers\ApiHelper;
-use App\Http\Controllers\Preparer\ContentPreparer;
+use App\Http\Controllers\Helpers\PageHelper;
 use App\TutupBuka;
 use App\Company;
 use App\Leader;
@@ -37,68 +37,21 @@ class PageController extends Controller
             switch ($page) {
                 case 'company':
                     $index_data  = Company::where('companies.status', 'ON')->sortable()->paginate(20);
-                    $filters     = ['nama_company' => 'Company'];
-                    $table_head  = [
-                        'id_company'    => 'ID',
-                        'nama_company'  => 'Company',
-                        'del_edit'      => 'Edit / Delete'
-                    ];
                     break;
                 case 'aplikasi':
                     $index_data  = Apps::where('apps.status', 'ON')->sortable()->paginate(20);
-                    $filters     = ['nama_apps' => 'Apps', 'link' => 'Link Apps', 'nama_company' => 'Company'];
-                    $table_head  = [
-                        'id_apps'                   => 'ID',
-                        'nama_apps'                 => 'Apps',
-                        'link_apps'                 => 'Link',
-                        'companies.nama_company'    => 'Company',
-                        'del_edit'                  => 'Edit / Delete'
-                    ];
                     break;
                 case 'divisi':
                     $index_data  = Divisi::where('divisi.status', 'ON')->sortable()->paginate(20);
-                    $filters     = ['nama_divisi' => 'Division', 'nama_aplikasi' => 'Apps'];
-                    $table_head  = [
-                        'id_divisi'         => 'ID',
-                        'nama_divisi'       => 'Division',
-                        'apps.nama_apps'    => 'Apps',
-                        'del_edit'          => 'Edit / Delete'
-                    ];
                     break;
                 case 'leader':
                     $index_data  = Leader::where('leaders.status', 'ON')->sortable()->paginate(20);
-                    $filters     = ['username' => 'Username', 'nama_aplikasi' => 'Apps'];
-                    $table_head  = [
-                        'id_leader'         => 'ID',
-                        'username'          => 'Username',
-                        'password'          => 'Password',
-                        'apps.nama_apps'    => 'Apps',
-                        'del_edit'          => 'Edit / Delete'
-                    ];
                     break;
                 case 'anak':
                     $index_data  = Anak::where('anak.status', 'ON')->sortable()->paginate(20);
-                    $filters     = ['username' => 'Username', 'nama_aplikasi' => 'Apps', 'divisi' => 'Division', 'leader' => 'Leader'];
-                    $table_head  = [
-                        'id_anak'               => 'ID',
-                        'username'              => 'Username',
-                        'password'              => 'Password',
-                        'divisi.nama_divisi'    => 'Division',
-                        'apps.nama_apps'        => 'Apps',
-                        'action'                => 'Action',
-                        'del_edit'              => 'Edit / Delete'
-                    ];
                     break;
                 case 'tutupbuka':
                     $index_data  = TutupBuka::sortable()->paginate(20);
-                    $filters     = ['anak' => 'Staff'];
-                    $table_head  = [
-                        'id_tutupbuka'          => 'ID',
-                        'anak.username'         => 'Staff',
-                        'apps'                  => 'Apps',
-                        'tanggal_tutup'         => 'Close Date',
-                        'tanggal_buka'          => 'Open Date'
-                    ];
                     break;
                 case 'dashboard':
                     $now = Carbon::now();
@@ -110,18 +63,13 @@ class PageController extends Controller
                         'current_tutup' => TutupBuka::orderBy('tanggal_tutup', 'desc')->limit(10)->get(),
                         'current_buka'  => TutupBuka::orderBy('tanggal_buka', 'desc')->limit(10)->get(),
                     ];
-                    $filters     = [];
-                    $table_head  = [];
                     break;
                 default:
                     $page        = '';
                     $index_data  = [];
-                    $filters     = [];
-                    $table_head  = [];
                     break;
             }
-
-            list($filters, $table_head) = $this->prepareList($filters, $table_head);
+            list($filters, $table_head) = PageHelper::build_data_table($page);
 
             return view("pages.{$page}.{$page}_list", [
                 'index_data'    => $index_data,
@@ -210,11 +158,98 @@ class PageController extends Controller
         return $this->index($page);
     }
 
-    private function prepareList(array $filters, array $table_head)
+    public function search(string $page, Request $request)
     {
-        $filters     = ContentPreparer::addChineseCharacter($filters);
-        $table_head  = ContentPreparer::addChineseCharacter($table_head);
-        
-        return array($filters, $table_head);
+        $option     = explode(':', $request->get('option'));
+        $relation   = $option[0];
+        $column     = $option[1];
+        $filter     = $request->get('search');
+
+        switch ($page) {
+            case 'company':
+                $index_data  = Company::where('companies.status', 'ON')
+                                        ->where($column, 'LIKE', '%'. $filter. '%')
+                                        ->sortable()->paginate(20);
+                break;
+            case 'aplikasi':
+                if (!empty($relation)) {
+                    $index_data  = Apps::whereHas($relation, function($query) use ($column, $filter) {
+                                            $query->where($column, 'LIKE', '%'. $filter. '%');
+                                        })
+                                        ->where('status', 'ON')
+                                        ->sortable()->paginate(20);
+                    break;    
+                }
+                $index_data  = Apps::where('status', 'ON')
+                                        ->where($column, 'LIKE', '%'. $filter. '%')
+                                        ->sortable()->paginate(20);
+                break;
+            case 'divisi':
+                if (!empty($relation)) {
+                    $index_data  = Divisi::whereHas($relation, function($query) use ($column, $filter) {
+                                            $query->where($column, 'LIKE', '%'. $filter. '%');
+                                        })
+                                        ->where('status', 'ON')
+                                        ->sortable()->paginate(20);
+                    break;    
+                }
+                $index_data  = Divisi::where('status', 'ON')
+                                        ->where($column, 'LIKE', '%'. $filter. '%')
+                                        ->sortable()->paginate(20);
+                break;
+            case 'leader':
+                if (!empty($relation)) {
+                    $index_data  = Leader::whereHas($relation, function($query) use ($column, $filter) {
+                                            $query->where($column, 'LIKE', '%'. $filter. '%');
+                                        })
+                                        ->where('status', 'ON')
+                                        ->sortable()->paginate(20);
+                    break;    
+                }
+                $index_data  = Leader::where('status', 'ON')
+                                        ->where($column, 'LIKE', '%'. $filter. '%')
+                                        ->sortable()->paginate(20);
+                break;
+            case 'anak':
+                if (!empty($relation)) {
+                    $index_data  = Anak::whereHas($relation, function($query) use ($column, $filter) {
+                                            $query->where($column, 'LIKE', '%'. $filter. '%');
+                                        })
+                                        ->where('status', 'ON')
+                                        ->sortable()->paginate(20);
+                    break;    
+                }
+                $index_data  = Anak::where('status', 'ON')
+                                        ->where($column, 'LIKE', '%'. $filter. '%')
+                                        ->sortable()->paginate(20);
+                break;
+            case 'tutupbuka':
+                if (!empty($relation)) {
+                    $index_data  = TutupBuka::whereHas($relation, function($query) use ($column, $filter) {
+                                            $query->where($column, 'LIKE', '%'. $filter. '%');
+                                        })
+                                        ->where('status', 'ON')
+                                        ->sortable()->paginate(20);
+                    break;    
+                }
+                $index_data  = TutupBuka::where('status', 'ON')
+                                        ->where($column, 'LIKE', '%'. $filter. '%')
+                                        ->sortable()->paginate(20);
+                break;
+                break;
+            default:
+                $page        = '';
+                $index_data  = [];
+                break;
+        }
+
+        list($filters, $table_head) = PageHelper::build_data_table($page);
+
+        return view("pages.{$page}.{$page}_list", [
+            'index_data'    => $index_data,
+            'filters'       => $filters,
+            'page'          => $page,
+            'table_head'    => $table_head
+        ]);
     }
 }
