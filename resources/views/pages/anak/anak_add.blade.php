@@ -67,6 +67,9 @@
                         url: urlLeader.replace(':id', id),
                         type: 'GET',
                         success: function(response) {
+                            if ($('.row--leader').length > 0) {
+                                $('.row--leader').remove();
+                            }
                             $(".row--apps").after(response);
                         }
                     }),
@@ -74,6 +77,9 @@
                         url: urlDivisi.replace(':id', id),
                         type: 'GET',
                         success: function(response) {
+                            if ($('.row--divisi').length > 0) {
+                                $('.row--divisi').remove();
+                            }
                             $(".row--leader").after(response);
                         }
                     })
