@@ -53,6 +53,9 @@
                     <p>Close & Open / 关 & 开</p>
                 </a>
             </li>
+            @if (Auth::user()->isAdmin())
+                @include('layouts.navbars.navs.admin')
+            @endif
         </ul>
     </div>
 </div>
