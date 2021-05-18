@@ -81,6 +81,7 @@ class PageHelper extends Controller
                     'password'              => 'Password',
                     'divisi.nama_divisi'    => 'Division',
                     'apps.nama_apps'        => 'Apps',
+                    'close_open'            => 'Close/Open',
                     'action'                => 'Action',
                     'del_edit'              => 'Edit / Delete'
                 ];
