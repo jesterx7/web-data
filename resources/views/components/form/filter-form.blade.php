@@ -1,9 +1,12 @@
+
 <div class="row">
-    <div class="col-md-2">
-        <a class="btn btn-info btn-fill add-table add--data" href="{{ route('page.add', $page) }}">
-        Add
-        </a>
-    </div>
+    @if (Auth::user()->isAdmin())
+        <div class="col-md-2">
+            <a class="btn btn-info btn-fill add-table add--data" href="{{ route('page.add', $page) }}">
+            Add
+            </a>
+        </div>
+    @endif
     <form class="col-md-10" action="{{ route('page.search', $page) }}" method="get" role="search">
         <div class="row">
             <div class="col-md-3">
