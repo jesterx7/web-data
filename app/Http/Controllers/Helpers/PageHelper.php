@@ -73,7 +73,7 @@ class PageHelper extends Controller
                     'username' => ['name' => 'Username', 'relational' => false, 'relation_name' => ''],
                     'nama_apps' => ['name' => 'Apps', 'relational' => true, 'relation_name' => 'apps'],
                     'nama_divisi' => ['name' => 'Division', 'relational' => true, 'relation_name' => 'divisi'],
-                    'username' => ['name' => 'Leader', 'relational' => true, 'relation_name' => 'leaders']
+                    'leaders.username' => ['name' => 'Leader', 'relational' => true, 'relation_name' => 'leaders']
                 ];
                 $table_head  = [
                     'id_anak'               => 'ID',
