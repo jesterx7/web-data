@@ -31,6 +31,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('{page}/add', ['as' => 'page.add', 'uses' => 'PageController@add']);
 	Route::get('{page}/search', ['as' => 'page.search', 'uses' => 'PageController@search']);
 	Route::get('{page}/{id}', ['as' => 'page.edit', 'uses' => 'PageController@edit']);
+	Route::get('admin/{page}/add', ['as' => 'admin.add', 'uses' => 'AdminController@add']);
+	Route::post('admin/{page}', ['as' => 'admin.save', 'uses' => 'AdminController@save']);
 	Route::post('{page}', ['as' => 'page.save', 'uses' => 'PageController@save']);
 	Route::post('{page}/import', ['as' => 'page.import', 'uses' => 'ImportController@import']);
 });
