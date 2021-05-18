@@ -81,6 +81,34 @@
                     }
                 })
             );
+
+            $("#select--apps").change(function() {
+                var id = this.value;
+                var urlLeader = '{{ route('api.ajax', ['leader', ':id', 0]) }}';
+                var urlDivisi = '{{ route('api.ajax', ['divisi', ':id', 0]) }}';
+                $.when(
+                    $.ajax({
+                        url: urlLeader.replace(':id', id),
+                        type: 'GET',
+                        success: function(response) {
+                            if ($('.row--leader').length > 0) {
+                                $('.row--leader').remove();
+                            }
+                            $(".row--apps").after(response);
+                        }
+                    }),
+                    $.ajax({
+                        url: urlDivisi.replace(':id', id),
+                        type: 'GET',
+                        success: function(response) {
+                            if ($('.row--divisi').length > 0) {
+                                $('.row--divisi').remove();
+                            }
+                            $(".row--leader").after(response);
+                        }
+                    })
+                );
+            });
         });
     </script>
 @endpush
