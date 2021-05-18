@@ -15,6 +15,10 @@
                             {{ $head }}
                         </th>
                     @endif
+                @elseif ($key == 'close_open')
+                    <th>
+                        {{ $head }}
+                    </th>
                 @else
                     <th>
                         @sortablelink($key, $head)
