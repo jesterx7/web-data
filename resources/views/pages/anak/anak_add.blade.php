@@ -10,6 +10,7 @@
             @method('POST')
             <div class="card">
                 <div class="card-header">
+                    @include('layouts.errors_templates.errors_data')
                     <h5 class="title">Add Anak</h5>
                 </div>
                 <div class="card-body">

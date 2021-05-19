@@ -9,7 +9,7 @@ $factory->define(Leader::class, function (Faker $faker) {
     return [
         'username'  => $faker->userName,
         'password'  => $faker->password,
-        'id_apps'   => factory(App\Apps::class),
+        'id_apps'   => App\Apps::all()->random()->id_apps,
         'status'    => 'ON'
     ];
 });
