@@ -99,6 +99,11 @@ class ApiController extends Controller
                 $deleteData->status = 'OFF';
                 $deleteData->save();
                 break;
+            case 'tutupbuka':
+                $deleteData = TutupBuka::where('id_tutupbuka', $id)->first();
+                $deleteData->status = 'OFF';
+                $deleteData->save();
+                break;
             default:
                 break;
         }
@@ -128,6 +133,10 @@ class ApiController extends Controller
             case 'divisi':
                 $editData = Divisi::where('id_divisi', $id)->first();
                 ApiHelper::saveDivisi($request, $editData);
+                break;
+            case 'tutupbuka':
+                $editData = TutupBuka::where('id_tutupbuka', $id)->first();
+                ApiHelper::saveTutupBuka($request, $editData);
                 break;
             default:
                 break;

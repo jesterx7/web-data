@@ -95,7 +95,8 @@ class PageHelper extends Controller
                     'anak.username'         => 'Staff',
                     'apps'                  => 'Apps',
                     'tanggal_tutup'         => 'Close Date',
-                    'tanggal_buka'          => 'Open Date'
+                    'tanggal_buka'          => 'Open Date',
+                    'del_edit'              => 'Edit / Delete'
                 ];
                 break;
             default:
