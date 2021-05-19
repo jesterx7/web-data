@@ -15,14 +15,6 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <label class="col-md-3 col-form-label">Close Date</label>
-                        <div class="col-md-9">
-                            <div class="form-group">
-                                <input type="datetime" name="close_date" class="form-control" placeholder="Tanggal Tutup" value="{{ $data->tanggal_tutup }}" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
                         <label class="col-md-3 col-form-label">Open Date</label>
                         <div class="col-md-9">
                             <div class="form-group">
@@ -30,6 +22,15 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <label class="col-md-3 col-form-label">Close Date</label>
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <input type="datetime" name="close_date" class="form-control" placeholder="Tanggal Tutup" value="{{ $data->tanggal_tutup }}" required>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="row">
                         <label class="col-md-3 col-form-label">ID Staff</label>
                         <div class="col-md-9">
