@@ -19,7 +19,7 @@ class Leader extends Eloquent
     public $timestamps = false;
 
     protected $fillable = [
-        'username', 'password', 'id_apps', 'id_divisi', 'status'
+        'username', 'password', 'id_apps', 'status'
     ];
 
     public $sortable = [

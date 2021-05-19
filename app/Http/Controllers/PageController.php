@@ -114,14 +114,17 @@ class PageController extends Controller
                     $data = Company::where('id_company', $id)->first();
                     return view("pages.{$page}.{$page}_edit", ['data' => $data, 'id' => $id]);
                 case 'aplikasi':
+                    $data = Apps::where('id_apps', $id)->first();
                     $companies = Company::all();
-                    return view("pages.{$page}.{$page}_edit", ['companies' => $companies]);
+                    return view("pages.{$page}.{$page}_edit", ['companies' => $companies, 'id' => $id, 'data' => $data]);
                 case 'divisi':
+                    $data = Divisi::where('id_divisi', $id)->first();
                     $apps = Apps::all();
-                    return view("pages.{$page}.{$page}_edit", ['apps' => $apps]);
+                    return view("pages.{$page}.{$page}_edit", ['apps' => $apps, 'id' => $id, 'data' => $data]);
                 case 'leader':
+                    $data = Leader::where('id_leader', $id)->first();
                     $apps = Apps::all();
-                    return view("pages.{$page}.{$page}_edit", ['apps' => $apps]);
+                    return view("pages.{$page}.{$page}_edit", ['apps' => $apps, 'id' => $id, 'data' => $data]);
                 case 'anak':
                     $data = Anak::where('id_anak', $id)->first();
                     $apps = Apps::all();

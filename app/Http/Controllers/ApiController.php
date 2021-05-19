@@ -117,6 +117,18 @@ class ApiController extends Controller
                 $editData = Anak::where('id_anak', $id)->first();
                 ApiHelper::saveAnak($request, $editData);
                 break;
+            case 'aplikasi':
+                $editData = Apps::where('id_apps', $id)->first();
+                ApiHelper::saveAplikasi($request, $editData);
+                break;
+            case 'leader':
+                $editData = Leader::where('id_leader', $id)->first();
+                ApiHelper::saveLeader($request, $editData);
+                break;
+            case 'divisi':
+                $editData = Divisi::where('id_divisi', $id)->first();
+                ApiHelper::saveDivisi($request, $editData);
+                break;
             default:
                 break;
         }
