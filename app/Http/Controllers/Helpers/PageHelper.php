@@ -96,7 +96,7 @@ class PageHelper extends Controller
                     'apps'                  => 'Apps',
                     'tanggal_tutup'         => 'Close Date',
                     'tanggal_buka'          => 'Open Date',
-                    'del_edit'              => 'Edit / Delete'
+                    'del_edit'              => 'Edit'
                 ];
                 break;
             default:
