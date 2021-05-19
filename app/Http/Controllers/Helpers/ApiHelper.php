@@ -119,4 +119,17 @@ class ApiHelper extends Controller
 
         return $validator->errors();
     }
+
+    public static function saveTutupBuka(Request $request, TutupBuka $tutupbuka) {
+        Validator::make($request->all(), [
+            'close_date'    => 'required',
+            'open_date'     => 'required'
+        ]);
+        
+        $tutupbuka->tanggal_tutup        = $request->get('close_date');
+        $tutupbuka->tanggal_buka         = $request->get('open_date');
+        $tutupbuka->status               = 'ON';
+
+        return $tutupbuka->save();
+    }
 }

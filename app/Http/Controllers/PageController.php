@@ -108,7 +108,7 @@ class PageController extends Controller
 
     public function edit(string $page, string $id)
     {
-        if (view()->exists("pages.{$page}.{$page}_add")) {
+        if (view()->exists("pages.{$page}.{$page}_edit")) {
             switch ($page) {
                 case 'company':
                     $data = Company::where('id_company', $id)->first();
@@ -129,6 +129,10 @@ class PageController extends Controller
                     $data = Anak::where('id_anak', $id)->first();
                     $apps = Apps::all();
                     return view("pages.{$page}.{$page}_edit", ['apps' => $apps, 'data' => $data, 'id' => $id]);
+                case 'tutupbuka':
+                    $data = TutupBuka::where('id_tutupbuka', $id)->first();
+                    $anak = Anak::where('id_anak', $data->id_anak)->first();
+                    return view("pages.{$page}.{$page}_edit", ['anak' => $anak, 'data' => $data, 'id' => $id]);
                 default:
                     return view("pages.{$page}.{$page}_edit");
             }
@@ -153,6 +157,9 @@ class PageController extends Controller
                 break;
             case 'anak':
                 $validator = ApiHelper::saveAnak($request, new Anak);
+                break;
+            case 'tutupbuka':
+                ApiHelper::saveTutupBuka($request, new TutupBuka);
                 break;
             default:
                 $validator = [];
