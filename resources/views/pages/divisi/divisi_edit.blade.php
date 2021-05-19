@@ -10,7 +10,7 @@
             @method('PUT')
             <div class="card">
                 <div class="card-header">
-                    <h5 class="title">Add Divisi</h5>
+                    <h5 class="title">Edit Divisi</h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
