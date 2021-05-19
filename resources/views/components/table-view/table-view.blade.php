@@ -29,7 +29,7 @@
         </thead>
         @yield('table-body')
     </table>
-    {{ $index_data->appends(Request::only('option', 'search'))->links() }}
+    {{ $index_data->appends(Request::except('page'))->render() }}
     
     @if ($page != 'dashboard' && Auth::user()->isAdmin())
         @include('components.form.import_export-form')

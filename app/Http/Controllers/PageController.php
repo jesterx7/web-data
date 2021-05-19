@@ -51,7 +51,7 @@ class PageController extends Controller
                     $index_data  = Anak::where('anak.status', 'ON')->sortable()->paginate(20);
                     break;
                 case 'tutupbuka':
-                    $index_data  = TutupBuka::sortable()->paginate(20);
+                    $index_data  = TutupBuka::where('tutup_buka.status', 'ON')->sortable()->paginate(20);
                     break;
                 case 'dashboard':
                     $now = Carbon::now();
