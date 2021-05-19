@@ -48,7 +48,7 @@
                                 @csrf
                                 @method('POST')
                                 <input type="text" name="action" value="tutup" hidden="true"/>
-                                <button type="submit" class="btn btn-info btn-fill btn-action--close">
+                                <button type="submit" class="btn btn-info btn-fill btn-action--close" onclick="return confirm('Are you sure ?')">
                                     <i class="nc-icon nc-simple-remove"></i>
                                 </button>
                             </form>

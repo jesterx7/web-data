@@ -9,7 +9,7 @@
             <form method="post" action="{{ route('api.delete', [$page, $id]) }}">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-info btn-fill btn-action--delete">
+                <button type="submit" class="btn btn-info btn-fill btn-action--delete" onclick="return confirm('Are you sure ?')">
                     <i class="nc-icon nc-scissors"></i>
                 </button>
             </form>
