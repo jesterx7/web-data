@@ -184,97 +184,72 @@ class PageController extends Controller
         switch ($page) {
             case 'company':
                 $index_data  = Company::where('companies.status', 'ON')
-                                        ->where($column, 'LIKE', '%'. $filter. '%')
-                                        ->orWhere($column, $filter)
+                                        ->whereRaw('LOWER('.$column.') LIKE ?', [trim(strtolower($filter)).'%'])
                                         ->sortable()->paginate(20);
                 break;
             case 'aplikasi':
                 if (!empty($relation)) {
                     $index_data  = Apps::where('status', 'ON')
                                         ->whereHas($relation, function($query) use ($column, $filter) {
-                                            $query->where($column, 'LIKE', '%'. $filter. '%')
-                                                ->orWhere($column, $filter);
-                                        })
-                                        ->orWhereHas($relation, function($query) use ($column, $filter) {
-                                            $query->where($column, $filter);
+                                            $query->whereRaw('LOWER('.$column.') LIKE ?', [trim(strtolower($filter)).'%']);
                                         })
                                         ->sortable()->paginate(20);
                     break;    
                 }
                 $index_data  = Apps::where('status', 'ON')
-                                        ->where($column, 'LIKE', '%'. $filter. '%')
-                                        ->orWhere($column, $filter)
+                                        ->whereRaw('LOWER('.$column.') LIKE ?', [trim(strtolower($filter)).'%'])
                                         ->sortable()->paginate(20);
                 break;
             case 'divisi':
                 if (!empty($relation)) {
                     $index_data  = Divisi::where('status', 'ON')
                                         ->whereHas($relation, function($query) use ($column, $filter) {
-                                            $query->where($column, 'LIKE', '%'. $filter. '%')
-                                                ->orWhere($column, $filter);
-                                        })
-                                        ->orWhereHas($relation, function($query) use ($column, $filter) {
-                                            $query->where($column, $filter);
+                                            $query->whereRaw('LOWER('.$column.') LIKE ?', [trim(strtolower($filter)).'%']);
                                         })
                                         ->sortable()->paginate(20);
                     break;    
                 }
                 $index_data  = Divisi::where('status', 'ON')
-                                        ->where($column, 'LIKE', '%'. $filter. '%')
-                                        ->orWhere($column, $filter)
+                                        ->whereRaw('LOWER('.$column.') LIKE ?', [trim(strtolower($filter)).'%'])
                                         ->sortable()->paginate(20);
                 break;
             case 'leader':
                 if (!empty($relation)) {
                     $index_data  = Leader::where('status', 'ON')
                                         ->whereHas($relation, function($query) use ($column, $filter) {
-                                            $query->where($column, 'LIKE', '%'. $filter. '%')
-                                                ->orWhere($column, $filter);
-                                        })
-                                        ->orWhereHas($relation, function($query) use ($column, $filter) {
-                                            $query->where($column, $filter);
+                                            $query->whereRaw('LOWER('.$column.') LIKE ?', [trim(strtolower($filter)).'%']);
                                         })
                                         ->sortable()->paginate(20);
                     break;    
                 }
                 $index_data  = Leader::where('status', 'ON')
-                                        ->where($column, 'LIKE', '%'. $filter. '%')
-                                        ->orWhere($column, $filter)
+                                        ->whereRaw('LOWER('.$column.') LIKE ?', [trim(strtolower($filter)).'%'])
                                         ->sortable()->paginate(20);
                 break;
             case 'anak':
                 if (!empty($relation)) {
                     $index_data  = Anak::where('status', 'ON')
                                         ->whereHas($relation, function($query) use ($column, $filter) {
-                                            $query->where($column, 'LIKE', '%'. $filter. '%');
-                                        })
-                                        ->orWhereHas($relation, function($query) use ($column, $filter) {
-                                            $query->where($column, $filter);
+                                            $query->whereRaw('LOWER('.$column.') LIKE ?', [trim(strtolower($filter)).'%']);
                                         })
                                         ->sortable()->paginate(20);
                     break;    
                 }
                 $index_data  = Anak::where('status', 'ON')
-                                        ->where($column, 'LIKE', '%'. $filter. '%')
-                                        ->orWhere($column, $filter)
+                                        ->whereRaw('LOWER('.$column.') LIKE ?', [trim(strtolower($filter)).'%'])
                                         ->sortable()->paginate(20);
                 break;
             case 'tutupbuka':
                 if (!empty($relation)) {
                     $index_data  = TutupBuka::where('status', 'ON')
                                         ->whereHas($relation, function($query) use ($column, $filter) {
-                                            $query->where($column, 'LIKE', '%'. $filter. '%')
-                                                ->orWhere($column, $filter);
-                                        })
-                                        ->orWhereHas($relation, function($query) use ($column, $filter) {
-                                            $query->where($column, $filter);
+                                            $query->whereRaw('LOWER('.$column.') LIKE ?', [trim(strtolower($filter)).'%']);
                                         })
                                         ->sortable()->paginate(20);
                     break;    
                 }
                 $index_data  = TutupBuka::where('status', 'ON')
-                                        ->where($column, 'LIKE', '%'. $filter. '%')
-                                        ->orWhere($column, $filter)
+                                        ->whereRaw('LOWER('.$column.') LIKE ?', [trim(strtolower($filter)).'%'])
                                         ->sortable()->paginate(20);
                 break;
             default:
