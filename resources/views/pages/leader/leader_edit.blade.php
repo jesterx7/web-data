@@ -5,9 +5,9 @@
 
 @section('content')
     <div class="content">
-        <form class="col-md-12" action="{{ route('page.save', 'leader') }}" method="POST">
+        <form class="col-md-12" action="{{ route('api.edit', ['leader', $id]) }}" method="POST">
             @csrf
-            @method('POST')
+            @method('PUT')
             <div class="card">
                 <div class="card-header">
                     <h5 class="title">Add Leader</h5>
@@ -17,7 +17,7 @@
                         <label class="col-md-3 col-form-label">Username</label>
                         <div class="col-md-9">
                             <div class="form-group">
-                                <input type="text" name="username" class="form-control" placeholder="Username" required>
+                                <input type="text" name="username" class="form-control" placeholder="Username" value="{{ $data->username }}" required>
                             </div>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
                         <label class="col-md-3 col-form-label">Password</label>
                         <div class="col-md-9">
                             <div class="form-group">
-                                <input type="text" name="password" class="form-control" placeholder="Password" required>
+                                <input type="text" name="password" class="form-control" placeholder="Password" value="{{ $data->password }}" required>
                             </div>
                         </div>
                     </div>
@@ -34,8 +34,13 @@
                         <div class="col-md-9">
                             <div class="form-group">
                             <select name="apps" class="form-control">
+                                <option value="0"></option>
                                 @foreach($apps as $app)
-                                    <option value="{{ $app->id_apps }}">{{ $app->nama_apps }}</option>
+                                    @if($app->id_apps == $data->id_apps)
+                                        <option value="{{ $app->id_apps }}" selected="selected">{{ $app->nama_apps }}</option>
+                                    @else
+                                        <option value="{{ $app->id_apps }}">{{ $app->nama_apps }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                             </div>
@@ -45,7 +50,7 @@
                 <div class="card-footer ">
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <button type="submit" class="btn btn-info btn-round">Add Leader</button>
+                            <button type="submit" class="btn btn-info btn-round">Update</button>
                         </div>
                     </div>
                 </div>
