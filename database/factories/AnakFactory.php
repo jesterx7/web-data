@@ -9,9 +9,9 @@ $factory->define(Anak::class, function (Faker $faker) {
     return [
         'username'  => $faker->userName,
         'password'  => $faker->password,
-        'id_apps'   => factory(App\Apps::class),
-        'id_divisi' => factory(App\Divisi::class),
-        'id_leader' => factory(App\Leader::class),
+        'id_apps'   => App\Apps::all()->random()->id_apps,
+        'id_divisi' => App\Divisi::all()->random()->id_divisi,
+        'id_leader' => App\Leader::all()->random()->id_leader,
         'status'    => 'ON'
     ];
 });

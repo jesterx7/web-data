@@ -7,6 +7,6 @@ use Faker\Generator as Faker;
 
 $factory->define(Company::class, function (Faker $faker) {
     return [
-        'nama_company' => $faker->company
+        'nama_company' => $faker->unique()->company
     ];
 });
