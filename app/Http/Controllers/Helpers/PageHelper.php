@@ -88,7 +88,8 @@ class PageHelper extends Controller
                 break;
             case 'tutupbuka':
                 $filters     = [
-                    'username' => ['name' => 'Staff', 'relational' => true, 'relation_name' => 'anak']
+                    'username' => ['name' => 'Staff', 'relational' => true, 'relation_name' => 'anak'],
+                    'nama_apps' => ['name' => 'Apps', 'relational' => true, 'relation_name' => 'anak.apps']
                 ];
                 $table_head  = [
                     'id_tutupbuka'          => 'ID',
