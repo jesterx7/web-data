@@ -8,8 +8,8 @@
                 <td>{{ $data->password }}</td>
                 <td>{{ $data->divisi->nama_divisi }}</td>
                 <td>{{ $data->apps->nama_apps }}</td>
-                @if ($data->tutupbuka->last())
-                    @if ($data->tutupbuka->last()->tanggal_buka != '9999-12-31 00:00:00')
+                @if ($data->tutupbuka->where('status', 'ON')->last())
+                    @if ($data->tutupbuka->where('status', 'ON')->last()->tanggal_buka != '9999-12-31 00:00:00')
                         <td>OPEN</td>
                     @else
                         <td>CLOSED</td>
@@ -18,8 +18,8 @@
                     <td>OPEN</td>
                 @endif
                 @if (Auth::user()->isAdmin())
-                    @if ($data->tutupbuka->last())
-                        @if ($data->tutupbuka->last()->tanggal_buka != '9999-12-31 00:00:00')
+                    @if ($data->tutupbuka->where('status', 'ON')->last())
+                        @if ($data->tutupbuka->where('status', 'ON')->last()->tanggal_buka != '9999-12-31 00:00:00')
                         <td>
                             <form method="post" action="{{ route('api.tutupbuka', ['anak', $data->id_anak]) }}">
                                 @csrf
