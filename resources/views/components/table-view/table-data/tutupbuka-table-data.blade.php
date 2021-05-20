@@ -7,7 +7,11 @@
                 <td>{{ $data->anak->username }}</td>
                 <td>{{ $data->anak->apps->nama_apps }}</td>
                 <td>{{ $data->tanggal_tutup }}</td>
-                <td>{{ $data->tanggal_buka }}</td>
+                @if ($data->tanggal_buka == '9999-12-31 00:00:00')
+                    <td>-</td>
+                @else
+                    <td>{{ $data->tanggal_buka }}</td>
+                @endif
                 <td class="table-view--body__edit-delete">@include('components.action-button.edit-delete', ['page' => $page, 'id' => $data->id_tutupbuka])</td>
             </tr>
         @endforeach
