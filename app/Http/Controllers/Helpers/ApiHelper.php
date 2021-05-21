@@ -52,7 +52,7 @@ class ApiHelper extends Controller
     public static function saveDivisi(Request $request, Divisi $divisi) {
         $validator = Validator::make($request->all(), [
             'apps'          => 'required',
-            'nama_divisi'   => ['required', Rule::unique('divisi')->where(function ($query) use ($request) {
+            'nama_divisi'   => ['required', Rule::unique('divisi')->ignoreModel($divisi)->where(function ($query) use ($request) {
                 return $query->where('nama_divisi', $request->get('nama_divisi'))->where('id_apps', $request->get('apps'));
             })]
         ]);
@@ -74,7 +74,7 @@ class ApiHelper extends Controller
         $validator = Validator::make($request->all(), [
             'password'  => 'required',
             'apps'      => 'required',
-            'username'  => ['required', Rule::unique('leaders')->where(function ($query) use ($request) {
+            'username'  => ['required', Rule::unique('leaders')->ignoreModel($leader)->where(function ($query) use ($request) {
                 return $query->where('username', $request->get('username'))->where('id_apps', $request->get('apps'));
             })]
         ]);
@@ -99,7 +99,8 @@ class ApiHelper extends Controller
             'apps'      => 'required|not_in:0',
             'divisi'    => 'required|not_in:0',
             'leader'    => 'required|not_in:0',
-            'username'  => ['required', Rule::unique('anak')->where(function ($query) use ($request) {
+            'open_date' => 'nullable|date_format:Y-m-d h:i:s',
+            'username'  => ['required', Rule::unique('anak')->ignoreModel($anak)->where(function ($query) use ($request) {
                 return $query->where('username', $request->get('username'))->where('id_apps', $request->get('apps'));
             })]
         ]);
@@ -108,7 +109,7 @@ class ApiHelper extends Controller
         {
             return $validator->errors();
         }
-        
+
         $anak->username     = $request->get('username');
         $anak->password     = $request->get('password');
         $anak->id_apps      = $request->get('apps');
@@ -116,6 +117,15 @@ class ApiHelper extends Controller
         $anak->id_leader    = $request->get('leader');
         $anak->status       = 'ON';
         $anak->save();
+
+        if ($request->get('open_date') != null) {
+            $tutupbuka = new TutupBuka;
+            $tutupbuka->tanggal_buka    = $request->get('open_date');
+            $tutupbuka->tanggal_tutup   = '9999-12-31 00:00:00';
+            $tutupbuka->status          = 'ON';
+            $tutupbuka->id_anak         = Anak::where('username', $anak->username)->where('id_apps', $anak->id_apps)->first()->id_anak;
+            $tutupbuka->save();
+        }
 
         return $validator->errors();
     }

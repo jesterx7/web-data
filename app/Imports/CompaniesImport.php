@@ -24,7 +24,7 @@ class CompaniesImport implements ToModel, WithHeadingRow, WithValidation
     public function rules(): array
     {
         return [
-            '*.nama_company'    => ['string', 'unique:companies,nama_company']
+            '*.nama_company'    => ['required', 'unique:companies,nama_company']
         ];
     }
 }

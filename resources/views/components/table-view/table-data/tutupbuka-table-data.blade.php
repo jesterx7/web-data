@@ -6,7 +6,11 @@
                 <td>{{ $data->id_tutupbuka }}</td>
                 <td>{{ $data->anak->username }}</td>
                 <td>{{ $data->anak->apps->nama_apps }}</td>
-                <td>{{ $data->tanggal_tutup }}</td>
+                @if ($data->tanggal_tutup == '9999-12-31 00:00:00')
+                    <td>-</td>
+                @else
+                    <td>{{ $data->tanggal_tutup }}</td>
+                @endif
                 @if ($data->tanggal_buka == '9999-12-31 00:00:00')
                     <td>-</td>
                 @else

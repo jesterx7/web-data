@@ -29,8 +29,8 @@ class AppsImport implements ToModel, WithHeadingRow, WithValidation
     public function rules(): array
     {
         return [
-            '*.nama_apps'       => ['string', 'unique:apps,nama_apps'],
-            '*.nama_company'    => ['string', 'exists:companies,nama_company'],
+            '*.nama_apps'       => ['required', 'unique:apps,nama_apps'],
+            '*.nama_company'    => ['required', 'exists:companies,nama_company'],
         ];
     }
 }

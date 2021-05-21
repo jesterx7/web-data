@@ -1,6 +1,6 @@
 
 <div class="row">
-    @if (Auth::user()->isAdmin())
+    @if (Auth::user()->isAdmin() && $page != 'tutupbuka')
         <div class="col-md-2">
             <a class="btn btn-info btn-fill add-table add--data" href="{{ route('page.add', $page) }}">
             Add
