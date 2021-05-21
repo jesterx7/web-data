@@ -30,6 +30,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <label class="col-md-3 col-form-label">Tanggal Buka</label>
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <input type="datetime" name="open_date" class="form-control" placeholder="Open Date" value="{{ $open }}" required>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row row--apps">
                         <label class="col-md-3 col-form-label">Apps</label>
                         <div class="col-md-9">

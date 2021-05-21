@@ -4,33 +4,31 @@ namespace App\Imports;
 
 use App\Leader;
 use App\Apps;
-use Maatwebsite\Excel\Concerns\ToModel;
+use App\Http\Controllers\ImportValidator;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Concerns\WithValidation;
 
-class LeaderImport implements ToModel, WithHeadingRow, WithValidation
+class LeaderImport implements ToCollection, WithHeadingRow
 {
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
-    public function model(array $row)
+    public function collection(Collection $rows)
     {
-        return new Leader([
-            'username'  => $row['username'],
-            'password'  => $row['password'],
-            'status'    => 'ON',
-            'id_apps'   => Apps::where('nama_apps', $row['nama_apps'])
-                                    ->first()
-                                    ->id_apps
-        ]);
-    }
-
-    public function rules(): array
-    {
-        return [
+        Validator::make($rows->toArray(), [
             '*.nama_apps'    => ['required', 'exists:apps,nama_apps']
-        ];
+        ])->validate();
+        foreach ($rows as $key => $row) {
+            $errors = ImportValidator::validateData('leader', $row, $key);
+            if (count($errors) == 0) {
+                $leader = Leader::create([
+                    'username'  => $row['username'],
+                    'password'  => $row['password'],
+                    'status'    => 'ON',
+                    'id_apps'   => ImportValidator::getAppsId($row['nama_apps'])
+                ]);
+            } else {
+                return back()->withErrors([$errors]);
+            }
+        }
     }
 }

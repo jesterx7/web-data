@@ -15,7 +15,6 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            @include('layouts.errors_templates.errors_data')
                             @include('components.table-view.table-data.'. $page. '-table-data')
                         </div>
                     </div>

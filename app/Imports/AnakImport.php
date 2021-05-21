@@ -6,7 +6,10 @@ use App\Anak;
 use App\Apps;
 use App\Divisi;
 use App\Leader;
+use App\TutupBuka;
+use Carbon\Carbon;
 use App\Http\Controllers\ImportValidator;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -19,44 +22,30 @@ class AnakImport implements ToCollection, WithHeadingRow
         Validator::make($rows->toArray(), [
             '*.nama_apps'               => ['required', 'exists:apps,nama_apps'],
             '*.nama_divisi'             => ['required', 'exists:divisi,nama_divisi'],
-            '*.username_leader'         => ['required', 'exists:leaders,username']
+            '*.username_leader'         => ['required', 'exists:leaders,username'],
+            '*.tanggal_buka'            => ['nullable']
         ])->validate();
         foreach ($rows as $key => $row) {
-            $validator = new ImportValidator();
-            if ($validator::divisiExists($row['nama_divisi'], $row['nama_apps']) && 
-                $validator::leaderExists($row['username_leader'], $row['nama_apps'])) {
+            $errors = ImportValidator::validateData('anak', $row, $key);
+            if (count($errors) == 0) {
                 $anak = Anak::create([
                     'username'  => $row['username'],
                     'password'  => $row['password'],
                     'status'    => 'ON',
-                    'id_apps'   => $this->getAppsId($row['nama_apps']),
-                    'id_divisi' => $this->getDivisiId($row['nama_divisi'], $this->getAppsId($row['nama_apps'])),
-                    'id_leader' => $this->getLeaderId($row['username_leader'], $this->getAppsId($row['nama_apps'])),
+                    'id_apps'   => ImportValidator::getAppsId($row['nama_apps']),
+                    'id_divisi' => ImportValidator::getDivisiId($row['nama_divisi'], ImportValidator::getAppsId($row['nama_apps'])),
+                    'id_leader' => ImportValidator::getLeaderId($row['username_leader'], ImportValidator::getAppsId($row['nama_apps'])),
+                ]);
+                
+                $tutupbuka = TutupBuka::create([
+                    'tanggal_tutup' => '9999-12-31 00:00:00',
+                    'tanggal_buka'  => ($row['tanggal_buka'] == null || empty($row['tanggal_buka'])) ? Carbon::now() : Date::excelToDateTimeObject($row['tanggal_buka'])->format('Y-m-d h:i:s'),
+                    'status'        => 'ON',
+                    'id_anak'       => Anak::where('username', $anak->username)->where('id_apps', $anak->id_apps)->first()->id_anak
                 ]);
             } else {
-                return back()->withErrors(['Divisi / Leader is Not Exsits on Its App in Row '. strval($key+2)]);
+                return back()->withErrors([$errors]);
             }
         }
-    }
-
-    private function getAppsId($nama_apps)
-    {
-        return Apps::where('nama_apps', $nama_apps)
-                    ->first()
-                    ->id_apps;
-    }
-
-    private function getDivisiId($nama_divisi, $id_apps)
-    {
-        return  Divisi::where(['nama_divisi' => $nama_divisi, 'id_apps' => $id_apps])
-                        ->first()
-                        ->id_divisi;
-    }
-
-    private function getLeaderId($username_leader, $id_apps)
-    {
-        return  Leader::where(['username' => $username_leader, 'id_apps' => $id_apps])
-                        ->first()
-                        ->id_leader;
     }
 }
