@@ -850,8 +850,19 @@ fieldset[disabled] .btn-success.active {
   color: #FFFFFF;
 }
 
-.btn-export {
+.btn-import {
   background-color: #00d173;
+  color: #FFFFFF;
+  width: 100%;
+}
+
+.btn-template {
+  color: #FFFFFF;
+  width: 100%;
+}
+
+.btn-download {
+  background-color: #51bcda;
   color: #FFFFFF;
   width: 100%;
 }

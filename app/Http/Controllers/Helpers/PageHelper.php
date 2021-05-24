@@ -108,4 +108,31 @@ class PageHelper extends Controller
 
         return PageHelper::prepareList($filters, $table_head);
     }
+
+    public static function model_name($page)
+    {
+        switch ($page) {
+            case 'company':
+                return 'Company';
+                break;
+            case 'aplikasi':
+                return 'Apps';
+                break;
+            case 'divisi':
+                return 'Divisi';
+                break;
+            case 'leader':
+                return 'Leader';
+                break;
+            case 'anak':
+                return 'Anak';
+                break;
+            case 'tutupbuka':
+                return 'TutupBuka';
+                break;
+            default:
+                return '';
+                break;
+        }
+    }
 }
