@@ -191,30 +191,7 @@ class PageController extends Controller
         $relation   = $option[0];
         $column     = $option[1];
         $filter     = $request->get('search');
-
-        switch ($page) {
-            case 'company':
-                $model_name = 'Company';
-                break;
-            case 'aplikasi':
-                $model_name = 'Apps';
-                break;
-            case 'divisi':
-                $model_name = 'Divisi';
-                break;
-            case 'leader':
-                $model_name = 'Leader';
-                break;
-            case 'anak':
-                $model_name = 'Anak';
-                break;
-            case 'tutupbuka':
-                $model_name = 'TutupBuka';
-                break;
-            default:
-                $model_name = 'Company';
-                break;
-        }
+        $model_name = PageHelper::model_name($page);
 
         $model = 'App\\'. $model_name;
         if (!empty($relation)) {
