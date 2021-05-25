@@ -44,12 +44,14 @@ class ImportController extends Controller
         return back();
     }
     
-    public function export(string $page, Request $request)
+    public function export(string $page, string $type, Request $request)
     {
         $model_name = PageHelper::model_name($page);
         $model      = 'App\\'. $model_name;
         $offset     = ($request->get('page') !== null) ? ($request->get('page') - 1) * 20 : 0;
         list($filters, $table_head) = PageHelper::build_data_table($page);
+        $query      = $model::where('status', 'ON');
+
         if ($request->get('option') !== null) {
             $option     = explode(':', $request->get('option'));
             $relation   = $option[0];
@@ -57,25 +59,20 @@ class ImportController extends Controller
             $filter     = $request->get('search');
 
             if (!empty($relation)) {
-                $data = $model::where('status', 'ON')
-                                    ->whereHas($relation, function($query) use ($column, $filter) {
+                $query = $query->whereHas($relation, function($query) use ($column, $filter) {
                                         $query->whereRaw('LOWER('.$column.') LIKE ?', [trim(strtolower($filter)).'%']);
-                                    })->offset($offset)
-                                    ->limit(20)
-                                    ->get();
+                                    });
             } else {
-                $data = $model::where('status', 'ON')
-                                    ->whereRaw('LOWER('.$column.') LIKE ?', [trim(strtolower($filter)).'%'])
-                                    ->offset($offset)
-                                    ->limit(20)
-                                    ->get();
+                $query = $query->whereRaw('LOWER('.$column.') LIKE ?', [trim(strtolower($filter)).'%']);
             }
-        } else {
-            $data = $model::where('status', 'ON')
-                                ->offset($offset)
-                                ->limit(20)
-                                ->get();
         }
+
+        if ($type === 'page') {
+            $query = $query->offset($offset)
+                        ->limit(20);
+        }
+
+        $data = $query->get();
         $exportData = [];
         $t_head = [];
         foreach ($table_head as $key => $value) {

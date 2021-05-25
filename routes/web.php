@@ -30,7 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('{page}', ['as' => 'page.index', 'uses' => 'PageController@index']);
 	Route::get('{page}/add', ['as' => 'page.add', 'uses' => 'PageController@add']);
 	Route::get('{page}/search', ['as' => 'page.search', 'uses' => 'PageController@search']);
-	Route::get('{page}/export', ['as' => 'page.export', 'uses' => 'ImportController@export']);
+	Route::get('{page}/export/{type}', ['as' => 'page.export', 'uses' => 'ImportController@export']);
 	Route::get('{page}/{id}', ['as' => 'page.edit', 'uses' => 'PageController@edit']);
 	Route::get('admin/{page}/add', ['as' => 'admin.add', 'uses' => 'AdminController@add']);
 	Route::post('admin/{page}', ['as' => 'admin.save', 'uses' => 'AdminController@save']);
